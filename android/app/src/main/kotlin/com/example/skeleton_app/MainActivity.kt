@@ -1,4 +1,4 @@
-package com.example.skeleton_app
+package com.nuacventurecapital.nuactransfer
 
 import io.flutter.embedding.android.FlutterActivity
 

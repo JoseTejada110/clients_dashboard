@@ -1,31 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_notifier.dart';
 import 'package:get/instance_manager.dart';
 import 'package:intl/intl.dart';
 import 'package:skeleton_app/core/constants.dart';
+import 'package:skeleton_app/core/utils/utils.dart';
+import 'package:skeleton_app/data/models/account_model.dart';
 import 'package:skeleton_app/data/models/chart_data_model.dart';
+import 'package:skeleton_app/domain/entities/portfolio_item_entity.dart';
 import 'package:skeleton_app/presentation/customer/portfolio/customer_portfolio_controller.dart';
+import 'package:skeleton_app/presentation/home/home_controller.dart';
 import 'package:skeleton_app/presentation/widgets/custom_card.dart';
 import 'package:skeleton_app/presentation/widgets/input_title.dart';
+import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
 import 'package:skeleton_app/presentation/widgets/support_button.dart';
 import 'package:skeleton_app/presentation/widgets/user_menu_button.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-
-class _Investment {
-  _Investment({
-    required this.name,
-    required this.returnPercentage,
-    required this.investedAmount,
-    required this.beginDate,
-    required this.endDate,
-    required this.color,
-  });
-  final String name;
-  final double returnPercentage;
-  final double investedAmount;
-  final DateTime beginDate;
-  final DateTime endDate;
-  final Color color;
-}
 
 class CustomerPortfolioPage extends StatelessWidget {
   const CustomerPortfolioPage({super.key});
@@ -35,24 +24,6 @@ class CustomerPortfolioPage extends StatelessWidget {
     final controller = Get.put(
       CustomerPortfolioController(apiRepository: Get.find()),
     );
-    final investments = [
-      _Investment(
-        name: 'Extracción de metales preciosos',
-        returnPercentage: 15.00,
-        investedAmount: 10000,
-        beginDate: DateTime.now(),
-        endDate: DateTime.now().add(const Duration(days: 365)),
-        color: Constants.blue.withOpacity(.8),
-      ),
-      _Investment(
-        name: 'Desarrollo de inmuebles Las Terrenas',
-        returnPercentage: 12.59,
-        investedAmount: 10000,
-        beginDate: DateTime.now(),
-        endDate: DateTime.now().add(const Duration(days: 365)),
-        color: Constants.green.withOpacity(.8),
-      ),
-    ];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Portafolio'),
@@ -61,84 +32,103 @@ class CustomerPortfolioPage extends StatelessWidget {
           UserMenuButton(),
         ],
       ),
-      body: Column(
-        children: [
-          _PieChart(
-            chartData: investments
-                .map(
-                  (element) => ChartData(
-                    y1: element.investedAmount,
-                    x1: element.name,
-                    percentage1: '50%',
-                    color1: element.color,
-                  ),
-                )
-                .toList(),
+      body: controller.obx(
+          onError: (error) => ErrorPlaceholder(
+                error ?? '',
+                tryAgain: controller.refreshInvestments,
+              ),
+          onEmpty: ErrorPlaceholder(
+            'No tienes inversiones|Ve a la sección de inversiones y explora todas nuestras opciones.',
+            tryAgain: () async => Get.find<HomeController>().updateMenuIndex(2),
+            buttonTitle: '¡Invertir Ahora!',
           ),
-          const SizedBox(height: 20),
-          Expanded(
-            child: CustomCard(
-              child: ListView.builder(
-                itemCount: investments.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return _PortfolioItem(investment: investments[index]);
-                },
+          onLoading: const CustomCard(child: LoadingWidget()), (_) {
+        return Column(
+          children: [
+            _PieChart(
+              chartData: List.generate(
+                controller.portfolioInvestments.length,
+                (index) => ChartData(
+                  y1: controller.portfolioInvestments[index].totalAmount,
+                  x1: controller.portfolioInvestments[index].investmentName,
+                  color1: controller.chartColors[index],
+                  percentage1:
+                      '${((controller.portfolioInvestments[index].totalAmount / Utils.getUser().accounts.first.investedAmount) * 100).toStringAsFixed(2)}%',
+                ),
               ),
             ),
-          ),
-        ],
-      ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: CustomCard(
+                child: RefreshIndicator(
+                  onRefresh: controller.refreshInvestments,
+                  child: ListView.builder(
+                    itemCount: controller.portfolioInvestments.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return _PortfolioItem(
+                        portfolioItem: controller.portfolioInvestments[index],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      }),
     );
   }
 }
 
 class _PortfolioItem extends StatelessWidget {
-  const _PortfolioItem({required this.investment});
-  final _Investment investment;
+  const _PortfolioItem({required this.portfolioItem});
+  final PortfolioItem portfolioItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      collapsedTextColor: null,
+      textColor: Constants.indicatorColor,
+      title: Text(
+        portfolioItem.investmentName,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            NumberFormat.simpleCurrency().format(portfolioItem.totalAmount),
+            style: const TextStyle(fontSize: 15),
+          ),
+          _EarningsProjectedRichText(
+            returnPercentage: portfolioItem.returnPercentage,
+            earningsProjected: portfolioItem.totalProjected,
+          ),
+        ],
+      ),
+      children: portfolioItem.investments
+          .map((investment) => _InvestmentItem(investment: investment))
+          .toList(),
+    );
+  }
+}
+
+class _InvestmentItem extends StatelessWidget {
+  const _InvestmentItem({required this.investment});
+  final AccountInvestment investment;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        investment.name,
-        style: const TextStyle(fontWeight: FontWeight.bold),
+        DateFormat('dd/MM/yyyy').add_jm().format(investment.investmentDate),
       ),
-      subtitle: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              // const Text('Retorno esperado: '),
-              RichText(
-                text: TextSpan(
-                  text:
-                      '${Constants.decimalFormat.format(investment.returnPercentage)}% ',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
-                    fontSize: 15,
-                  ),
-                  children: [
-                    TextSpan(
-                      text:
-                          '(${NumberFormat.simpleCurrency().format(investment.investedAmount * (investment.returnPercentage / 100))})',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            fontSize: 14,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Text(
-            '${Constants.dateFormat.format(investment.beginDate)} - ${Constants.dateFormat.format(investment.endDate)} (${investment.endDate.difference(investment.beginDate).inDays ~/ 30} meses)',
-          ),
-        ],
+      subtitle: _EarningsProjectedRichText(
+        returnPercentage: investment.returnPercentage,
+        earningsProjected: investment.earningsProjected,
       ),
       trailing: Text(
-        NumberFormat.simpleCurrency().format(10000),
+        NumberFormat.simpleCurrency().format(investment.investedAmount),
         style: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 15,
@@ -147,6 +137,38 @@ class _PortfolioItem extends StatelessWidget {
       onTap: () {
         print('GO TO INVESTMENT DETAILS');
       },
+    );
+  }
+}
+
+class _EarningsProjectedRichText extends StatelessWidget {
+  const _EarningsProjectedRichText({
+    required this.returnPercentage,
+    required this.earningsProjected,
+  });
+  final double returnPercentage;
+  final double earningsProjected;
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        text: '${Constants.decimalFormat.format(returnPercentage)}% ',
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.green,
+          fontSize: 15,
+        ),
+        children: [
+          TextSpan(
+            text:
+                '(${NumberFormat.simpleCurrency().format(earningsProjected)})',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  fontSize: 14,
+                ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -201,7 +223,10 @@ class _PieChart extends StatelessWidget {
                   yValueMapper: (ChartData point, _) => point.y1,
                   pointColorMapper: (ChartData point, _) => point.color1,
                   dataLabelMapper: (ChartData point, _) => point.percentage1,
-                  dataLabelSettings: const DataLabelSettings(isVisible: true),
+                  dataLabelSettings: const DataLabelSettings(
+                    isVisible: true,
+                    labelPosition: ChartDataLabelPosition.outside,
+                  ),
                 ),
               ],
             ),

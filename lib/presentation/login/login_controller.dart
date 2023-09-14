@@ -10,6 +10,7 @@ import 'package:skeleton_app/data/models/user_model.dart';
 import 'package:skeleton_app/domain/repositories/api_repository.dart';
 import 'package:skeleton_app/domain/repositories/local_storage_repository.dart';
 import 'package:skeleton_app/domain/usecases/login_usecase.dart';
+import 'package:skeleton_app/domain/usecases/notifications_usecase.dart';
 
 class LoginController extends GetxController with StateMixin {
   LoginController({required this.apiRepository, required this.localRepository});
@@ -23,6 +24,7 @@ class LoginController extends GetxController with StateMixin {
   @override
   void onInit() {
     _loadInfo();
+    _requestNotificationPermission();
     super.onInit();
   }
 
@@ -34,6 +36,10 @@ class LoginController extends GetxController with StateMixin {
     change([], status: RxStatus.success());
   }
 
+  void _requestNotificationPermission() async {
+    NotificationUsecase().requestNotificationPermission();
+  }
+
   void updateRememberUsename(bool? value) {
     rememberUsername.value = value ?? false;
     localRepository.updateRemeberUsername(value);
@@ -43,7 +49,7 @@ class LoginController extends GetxController with StateMixin {
     isObscure.value = !isObscure.value;
   }
 
-  Future<User?> signIn() async {
+  Future<UserModel?> signIn() async {
     if (usernameController.text.isEmpty) {
       MessagesUtils.errorSnackbar(
         'Usuario Obligatorio',
@@ -59,42 +65,40 @@ class LoginController extends GetxController with StateMixin {
       return null;
     }
     MessagesUtils.showLoading();
-    final body = {
-      'username': usernameController.text,
-      'password': passwordController.text,
-      'remember_me': rememberUsername.value,
-    };
-    final res = await LoginUsecase(apiRepository).signIn(body);
-    MessagesUtils.dismissLoading();
+    final res = await LoginUsecase(apiRepository).signIn(
+      usernameController.text,
+      passwordController.text,
+    );
     return res.fold(
       (failure) async {
+        MessagesUtils.dismissLoading();
         if (failure is UnauthorizedFailure) {
           MessagesUtils.errorSnackbar(
             "Credenciales Inválidas",
-            "¡Usuario y/o contraseña inválidos!",
+            "Correo y/o contraseña inválidos!",
           );
           return null;
         }
+        final message = getMessageFromFailure(failure);
+        MessagesUtils.errorSnackbar(
+          message.title,
+          message.message,
+        );
         return null;
       },
-      (dynamic result) {
-        // localRepository.storeToken(result.token, result.expiresAt);
+      (UserModel result) async {
         localRepository.updateCredentials(
           usernameController.text,
           passwordController.text,
         );
-        // TODO: Change this for result.user
-        final userRresult = User(
-          id: 1,
-          name: 'José Anibal Tejada Jiménez',
-          username: 'jose',
-          image: '',
-          isAdmin: 0,
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
+        NotificationUsecase().subscribeToTopic(
+          result.isAdmin ? AvailableTopic.allAdmins : AvailableTopic.allClients,
         );
-        localRepository.storeUser(jsonEncode(userRresult.toJson()));
-        return userRresult;
+        MessagesUtils.dismissLoading();
+        localRepository.storeUser(
+          jsonEncode(result.toJson(isToStoreInLocal: true)),
+        );
+        return result;
       },
     );
   }

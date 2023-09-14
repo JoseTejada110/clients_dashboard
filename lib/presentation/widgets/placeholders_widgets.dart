@@ -45,9 +45,11 @@ class ErrorPlaceholder extends StatelessWidget {
     this.message, {
     super.key,
     this.tryAgain,
+    this.buttonTitle = 'Intentar de Nuevo',
   });
   final String message;
   final Future<void> Function()? tryAgain;
+  final String buttonTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +63,7 @@ class ErrorPlaceholder extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            //TODO: Mostrar imagen
+            //TODO: Mostrar Ícono
             Text(
               title,
               style: const TextStyle(
@@ -80,9 +82,9 @@ class ErrorPlaceholder extends StatelessWidget {
             SizedBox(height: tryAgain == null ? 0 : 20),
             tryAgain == null
                 ? const SizedBox()
-                : ElevatedButton(
+                : FilledButton(
                     onPressed: tryAgain,
-                    child: const Text('Intentar de Nuevo'),
+                    child: Text(buttonTitle),
                   ),
           ],
         ),

@@ -1,8 +1,17 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:skeleton_app/domain/entities/menu_item_class.dart';
 
 class UploadFileButton extends StatelessWidget {
-  const UploadFileButton({super.key});
+  const UploadFileButton({
+    super.key,
+    required this.onImagePicked,
+    this.customTitle,
+  });
+  final void Function(File image) onImagePicked;
+  final String? customTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +31,7 @@ class UploadFileButton extends StatelessWidget {
               controller.open();
             }
           },
-          label: const Text('Cargar'),
+          label: Text(customTitle ?? 'Cargar'),
         );
       },
       menuChildren: items
@@ -38,6 +47,19 @@ class UploadFileButton extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
               ),
+              onPressed: () async {
+                final ImagePicker picker = ImagePicker();
+                final source = element.title == 'Galería'
+                    ? ImageSource.gallery
+                    : ImageSource.camera;
+                final XFile? image = await picker.pickImage(
+                  source: source,
+                  maxHeight: 640,
+                  maxWidth: 640,
+                );
+                if (image == null) return;
+                onImagePicked(File(image.path));
+              },
             ),
           )
           .toList(),

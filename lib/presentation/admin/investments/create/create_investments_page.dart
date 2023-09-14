@@ -4,6 +4,7 @@ import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:skeleton_app/core/constants.dart';
 import 'package:skeleton_app/core/utils/utils.dart';
 import 'package:skeleton_app/presentation/admin/investments/create/create_investments_controller.dart';
+import 'package:skeleton_app/presentation/widgets/custom_buttons.dart';
 import 'package:skeleton_app/presentation/widgets/custom_card.dart';
 import 'package:skeleton_app/presentation/widgets/custom_date_picker.dart';
 import 'package:skeleton_app/presentation/widgets/custom_input.dart';
@@ -101,10 +102,18 @@ class CreateInvestmentsPage extends GetView<CreateInvestmentsController> {
                 ],
               ),
               const SizedBox(height: 10),
+              Obx(() {
+                return CustomCheckboxListTile(
+                  value: controller.isAvailable.value,
+                  onChanged: controller.switchIsAvailable,
+                  title: '¿Está disponible?',
+                );
+              }),
+              const SizedBox(height: 10),
               SizedBox(
                 width: double.infinity,
                 child: FilledButton(
-                  onPressed: () {},
+                  onPressed: controller.createInvestment,
                   child: const Text('Crear Inversión'),
                 ),
               ),

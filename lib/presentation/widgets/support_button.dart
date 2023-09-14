@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+import 'package:skeleton_app/presentation/routes/app_navigation.dart';
 import 'package:skeleton_app/presentation/widgets/custom_buttons.dart';
 
 class SupportButton extends StatelessWidget {
@@ -9,9 +11,7 @@ class SupportButton extends StatelessWidget {
     return CustomIconButton(
       tooltip: 'Obtener ayuda',
       icon: Icons.help_outline,
-      onPressed: () {
-        //
-      },
+      onPressed: () => Get.toNamed(AppRoutes.support),
     );
   }
 }

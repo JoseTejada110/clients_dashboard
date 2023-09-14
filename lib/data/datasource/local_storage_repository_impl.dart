@@ -72,11 +72,11 @@ class LocalStorageRepositoryImpl extends LocalStorageRepositoryInterface {
   }
 
   @override
-  Future<User?> readUser() async {
+  Future<UserModel?> readUser() async {
     const storage = FlutterSecureStorage();
     final userJson = await storage.read(key: 'user');
     if (userJson == null) return null;
-    return User.fromJson(jsonDecode(userJson));
+    return UserModel.fromJson(jsonDecode(userJson));
   }
 
   @override

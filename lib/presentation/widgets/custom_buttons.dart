@@ -1,8 +1,6 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:skeleton_app/core/constants.dart';
 import 'package:skeleton_app/presentation/widgets/custom_card.dart';
 
 class CustomIconButton extends StatelessWidget {
@@ -70,9 +68,9 @@ class CustomBottomButton extends StatelessWidget {
           child: Text(
             title,
             style: TextStyle(
-              color: titleColor ?? Colors.white,
+              color: titleColor ?? Colors.black,
               fontWeight: FontWeight.bold,
-              fontSize: 16,
+              fontSize: 17,
             ),
           ),
         ),
@@ -155,6 +153,31 @@ class CustomTextButton extends StatelessWidget {
       ),
       onPressed: onPressed,
       child: Text(title),
+    );
+  }
+}
+
+class CustomCheckboxListTile extends StatelessWidget {
+  const CustomCheckboxListTile({
+    super.key,
+    required this.value,
+    required this.title,
+    required this.onChanged,
+  });
+  final bool? value;
+  final String title;
+  final void Function(bool?)? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return CheckboxListTile.adaptive(
+      controlAffinity: ListTileControlAffinity.leading,
+      contentPadding: EdgeInsets.zero,
+      visualDensity: VisualDensity.compact,
+      activeColor: Constants.darkIndicatorColor,
+      onChanged: onChanged,
+      value: value,
+      title: Text(title),
     );
   }
 }

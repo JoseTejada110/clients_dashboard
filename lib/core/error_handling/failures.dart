@@ -101,7 +101,7 @@ class FailureHandler implements FailureVisitor {
   @override
   void visitDataParsingFailure(DataParsingFailure failure) {
     errorResponse = ErrorResponse(
-      title: failure.message?['titulo_error'] ?? 'Error al procesar los datos',
+      title: failure.message?['error_title'] ?? 'Error al procesar los datos',
       message:
           'Al parecer la aplicación no está actualizada, actualice la app e intente de nuevo.',
     );
@@ -110,8 +110,8 @@ class FailureHandler implements FailureVisitor {
   @override
   void visitNoConnectionFailure(NoConnectionFailure failure) {
     errorResponse = ErrorResponse(
-      title: failure.message?['titulo_error'] ?? 'No hay conexión a internet',
-      message: failure.message?['mensaje_error'] ??
+      title: failure.message?['error_title'] ?? 'No hay conexión a internet',
+      message: failure.message?['error_message'] ??
           'Al parecer su dispositivo no está conectado a internet, verifique su conexión a internet e intente de nuevo.',
     );
   }
@@ -119,8 +119,8 @@ class FailureHandler implements FailureVisitor {
   @override
   void visitServerFailure(ServerFailure failure) {
     errorResponse = ErrorResponse(
-      title: failure.message?['titulo_error'] ?? 'Algo ha salido mal',
-      message: failure.message?['mensaje_error'] ??
+      title: failure.message?['error_title'] ?? 'Algo ha salido mal',
+      message: failure.message?['error_message'] ??
           'Ha ocurrido una excepción inesperada, intente de nuevo más tarde.',
     );
   }
@@ -128,8 +128,8 @@ class FailureHandler implements FailureVisitor {
   @override
   void visitTimeoutFailure(TimeoutFailure failure) {
     errorResponse = ErrorResponse(
-      title: failure.message?['titulo_error'] ?? 'Tiempo de espera agotado',
-      message: failure.message?['mensaje_error'] ??
+      title: failure.message?['error_title'] ?? 'Tiempo de espera agotado',
+      message: failure.message?['error_message'] ??
           'No ha sido posible conectarse con el servidor, verifique su conexión a internet e intente de nuevo.',
     );
   }
@@ -137,8 +137,8 @@ class FailureHandler implements FailureVisitor {
   @override
   void visitUnauthorizedFailure(UnauthorizedFailure failure) {
     errorResponse = ErrorResponse(
-      title: failure.message?['titulo_error'] ?? 'No autorizado',
-      message: failure.message?['mensaje_error'] ??
+      title: failure.message?['error_title'] ?? 'No autorizado',
+      message: failure.message?['error_message'] ??
           'No tienes permiso para ejecutar esta acción',
     );
   }
@@ -146,8 +146,8 @@ class FailureHandler implements FailureVisitor {
   @override
   void visitUnhandledFailure(UnhandledFailure failure) {
     errorResponse = ErrorResponse(
-      title: failure.message?['titulo_error'] ?? 'Excepción Inesperada',
-      message: failure.message?['mensaje_error'] ??
+      title: failure.message?['error_title'] ?? 'Excepción Inesperada',
+      message: failure.message?['error_message'] ??
           'Ha ocurrido una excepción inesperada, intente de nuevo más tarde.',
     );
   }

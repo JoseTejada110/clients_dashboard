@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:skeleton_app/core/constants.dart';
+import 'package:skeleton_app/core/utils/utils.dart';
 import 'package:skeleton_app/data/models/chart_data_model.dart';
 import 'package:skeleton_app/presentation/customer/home/customer_home_controller.dart';
+import 'package:skeleton_app/presentation/routes/app_navigation.dart';
 import 'package:skeleton_app/presentation/widgets/custom_card.dart';
 import 'package:skeleton_app/presentation/widgets/dashboard_card.dart';
 import 'package:skeleton_app/presentation/widgets/input_title.dart';
+import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
 import 'package:skeleton_app/presentation/widgets/support_button.dart';
 import 'package:skeleton_app/presentation/widgets/user_menu_button.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -19,6 +22,7 @@ class CustomerHomePage extends StatelessWidget {
     final controller = Get.put(
       CustomerHomeController(apiRepository: Get.find()),
     );
+    final userAccount = Utils.getUser().accounts.first;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Inicio'),
@@ -27,82 +31,90 @@ class CustomerHomePage extends StatelessWidget {
           UserMenuButton(),
         ],
       ),
-      body: ListView(
-        physics: const ClampingScrollPhysics(),
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: DashboardCard(
-                  title: 'Balance \nNeto',
-                  data: NumberFormat.simpleCurrency().format(21000),
-                  icon: Icons.swap_horiz,
-                  iconBackgroundColor: Constants.secondaryColor,
+      body: controller.obx(
+        onError: (error) => ErrorPlaceholder(
+          error ?? '',
+          tryAgain: controller.loadUserInvestments,
+        ),
+        onLoading: const LoadingWidget(),
+        (_) => ListView(
+          physics: const ClampingScrollPhysics(),
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: DashboardCard(
+                    title: 'Balance \nNeto',
+                    data: NumberFormat.simpleCurrency()
+                        .format(userAccount.netBalance),
+                    icon: Icons.swap_horiz,
+                    iconBackgroundColor: Constants.secondaryColor,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: DashboardCard(
-                  title: 'Balance \nDisponible',
-                  data: NumberFormat.simpleCurrency().format(1000),
-                  icon: Icons.people,
-                  iconBackgroundColor: Constants.blue,
+                const SizedBox(width: 10),
+                Expanded(
+                  child: DashboardCard(
+                    title: 'Balance \nDisponible',
+                    data: NumberFormat.simpleCurrency()
+                        .format(userAccount.getAvailableBalance()),
+                    icon: Icons.people,
+                    iconBackgroundColor: Constants.blue,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                child: DashboardCard(
-                  title: 'Balance \nInvertido',
-                  data: NumberFormat.simpleCurrency().format(20000),
-                  icon: Icons.attach_money,
-                  iconBackgroundColor: Constants.green,
+              ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: DashboardCard(
+                    title: 'Balance \nInvertido',
+                    data: NumberFormat.simpleCurrency()
+                        .format(userAccount.investedAmount),
+                    icon: Icons.attach_money,
+                    iconBackgroundColor: Constants.green,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: DashboardCard(
-                  title: 'Proyección a \nFuturo',
-                  data: NumberFormat.simpleCurrency()
-                      .format((20000 * 0.1559) + 21000),
-                  icon: Icons.show_chart,
-                  iconBackgroundColor: Constants.darkIndicatorColor,
+                const SizedBox(width: 10),
+                Expanded(
+                  child: DashboardCard(
+                    title: 'Proyección a \nFuturo',
+                    data: NumberFormat.simpleCurrency().format(
+                        userAccount.getTotalEarningsProjection() +
+                            userAccount.netBalance),
+                    icon: Icons.show_chart,
+                    iconBackgroundColor: Constants.darkIndicatorColor,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          _LineChart(
-            chartData: [
-              ChartData(y1: 18000, x1: '05/2023'),
-              ChartData(y1: 17000, x1: '06/2023'),
-              ChartData(y1: 20250, x1: '07/2023'),
-              ChartData(y1: 21000, x1: '08/2023'),
-            ],
-          ),
-          const SizedBox(height: 20),
-          CustomCard(
-            padding: Constants.bodyPadding,
-            onPressed: () {
-              // TODO: NAVIGATE TO DEPOSITAR PAGE
-              print('Ir a depositar');
-            },
-            child: const ListTile(
-              leading: Icon(
-                Icons.attach_money,
-                color: Constants.indicatorColor,
-              ),
-              title: Text('Depositar Fondos'),
-              trailing: Icon(
-                Icons.chevron_right,
-                color: Constants.indicatorColor,
+              ],
+            ),
+            const SizedBox(height: 20),
+            _LineChart(
+              chartData: [
+                ChartData(y1: 18000, x1: '05/2023'),
+                ChartData(y1: 17000, x1: '06/2023'),
+                ChartData(y1: 20250, x1: '07/2023'),
+                ChartData(y1: 21000, x1: '08/2023'),
+              ],
+            ),
+            const SizedBox(height: 20),
+            CustomCard(
+              padding: Constants.bodyPadding,
+              onPressed: () => Get.toNamed(AppRoutes.depositFunds),
+              child: const ListTile(
+                leading: Icon(
+                  Icons.attach_money,
+                  color: Constants.indicatorColor,
+                ),
+                title: Text('Depositar Fondos'),
+                trailing: Icon(
+                  Icons.chevron_right,
+                  color: Constants.indicatorColor,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

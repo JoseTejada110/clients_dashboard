@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 import 'package:skeleton_app/core/constants.dart';
 import 'package:skeleton_app/core/utils/utils.dart';
 import 'package:skeleton_app/presentation/customer/investments/customer_investments_controller.dart';
-import 'package:skeleton_app/presentation/routes/app_navigation.dart';
 import 'package:skeleton_app/presentation/widgets/custom_card.dart';
 import 'package:skeleton_app/presentation/widgets/custom_input.dart';
+import 'package:skeleton_app/presentation/widgets/investments_list.dart';
+import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
 import 'package:skeleton_app/presentation/widgets/support_button.dart';
 import 'package:skeleton_app/presentation/widgets/user_menu_button.dart';
 
@@ -41,51 +41,23 @@ class CustomerInvestmentsPage extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: ListView.builder(
-                  itemCount: 4,
-                  itemBuilder: (BuildContext context, int index) {
-                    return const _InvestmentItem();
-                  },
-                ),
+                child: controller.obx(
+                    onError: (error) => ErrorPlaceholder(
+                          error ?? '',
+                          tryAgain: controller.loadInvestments,
+                        ),
+                    onLoading: const LoadingWidget(), (_) {
+                  return InvestmentsList(
+                    onRefresh: controller.loadInvestments,
+                    investments: controller.investments,
+                    isFromCustomerView: true,
+                  );
+                }),
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-class _InvestmentItem extends StatelessWidget {
-  const _InvestmentItem();
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: const Text(
-        'Extracción de metales preciosos',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      subtitle: RichText(
-        text: TextSpan(
-          text: '${Constants.decimalFormat.format(15.59)}% ',
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.green,
-            fontSize: 15,
-          ),
-          children: [
-            TextSpan(
-              text: '(12 Meses)',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    fontSize: 14,
-                  ),
-            ),
-          ],
-        ),
-      ),
-      trailing: const Icon(Icons.chevron_right),
-      onTap: () => Get.toNamed(AppRoutes.investmentDetails),
     );
   }
 }

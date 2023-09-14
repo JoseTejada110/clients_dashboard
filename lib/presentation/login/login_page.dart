@@ -9,11 +9,14 @@ import 'package:skeleton_app/presentation/widgets/custom_buttons.dart';
 import 'package:skeleton_app/presentation/widgets/custom_input.dart';
 import 'package:skeleton_app/presentation/widgets/input_title.dart';
 
-class LoginPage extends GetView<LoginController> {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(
+      LoginController(apiRepository: Get.find(), localRepository: Get.find()),
+    );
     final themeData = Theme.of(context);
     return GestureDetector(
       onTap: () => Utils.unfocus(context),
@@ -44,12 +47,13 @@ class LoginPage extends GetView<LoginController> {
                       ),
                     ),
                     const SizedBox(height: 60),
-                    const InputTitle('Nombre de usuario'),
+                    const InputTitle('Correo Electrónico'),
                     CustomInput(
                       autocorrect: false,
                       controller: controller.usernameController,
-                      hintText: 'Ingresa tu nombre de usuario',
+                      hintText: 'Ingresa tu correo electrónico',
                       textCapitalization: TextCapitalization.none,
+                      textInputType: TextInputType.emailAddress,
                       inputAction: TextInputAction.next,
                       suffixIcon: const SizedBox(),
                     ),
@@ -91,6 +95,14 @@ class LoginPage extends GetView<LoginController> {
                         child: const Text('Iniciar Sesión'),
                       ),
                     ),
+                    const SizedBox(height: 10),
+                    Center(
+                      child: CustomTextButton(
+                        foregroundColor: Constants.grey,
+                        title: '¿No tienes una cuenta? ¡Crea una ahora!',
+                        onPressed: () => Get.toNamed(AppRoutes.signUp),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -102,6 +114,7 @@ class LoginPage extends GetView<LoginController> {
   }
 
   void loginAndGoToHome() async {
+    final controller = Get.find<LoginController>();
     final logguedUser = await controller.signIn();
     if (logguedUser == null) return;
     Get.put(

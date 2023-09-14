@@ -1,56 +1,105 @@
 import 'dart:convert';
 
-List<User> userFromJson(dynamic json) =>
-    List<User>.from(json.map((x) => User.fromJson(x)));
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:skeleton_app/core/constants.dart';
+import 'package:skeleton_app/data/models/account_model.dart';
 
-String userToJson(User data) => json.encode(data.toJson());
+List<UserModel> userFromJson(dynamic json) =>
+    List<UserModel>.from(json.map((x) => UserModel.fromJson(x)));
 
-class User {
-  User({
+String userToJson(UserModel data) => json.encode(data.toJson());
+
+class UserModel {
+  UserModel({
     required this.id,
-    required this.name,
-    required this.username,
-    this.phoneNumber,
-    required this.image,
+    required this.referredBy,
+    required this.verifiedBy,
+    required this.address,
+    required this.status,
+    required this.birthdayDate,
+    required this.email,
+    required this.faceImage,
+    required this.identification,
+    required this.identificationImage,
+    required this.identificationType,
     required this.isAdmin,
+    required this.name,
+    required this.phoneNumber,
+    required this.addressProofImage,
     required this.createdAt,
-    required this.updatedAt,
-    this.deletedAt,
+    required this.accounts,
+    required this.bankAccounts,
   });
 
-  int id;
+  String id;
+  final DocumentReference<Map<String, dynamic>>? referredBy;
+  final DocumentReference<Map<String, dynamic>>? verifiedBy;
+  String status;
+  String address;
+  DateTime birthdayDate;
+  String email;
+  String faceImage;
+  String identification;
+  String identificationImage;
+  String identificationType;
+  bool isAdmin;
   String name;
-  String username;
-  String? phoneNumber;
-  String image;
-  int isAdmin;
+  String phoneNumber;
+  String addressProofImage;
   DateTime createdAt;
-  DateTime updatedAt;
-  DateTime? deletedAt;
+  List<Account> accounts;
+  CollectionReference<Map<String, dynamic>>? bankAccounts;
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory UserModel.fromJson(Map<String, dynamic> json,
+          {bool isAccountsLoaded = false}) =>
+      UserModel(
         id: json["id"],
-        name: json["name"],
-        username: json["username"],
-        phoneNumber: json["phone_number"],
-        image: json["image"],
+        referredBy: json["referred_by"],
+        verifiedBy: json["verified_by"],
+        address: json["address"] ?? '',
+        status: json["status"] ?? '',
+        birthdayDate: (json['birthday_date'] as Timestamp).toDate(),
+        email: json["email"] ?? '',
+        faceImage: json["face_image"] ?? '',
+        identification: json["identification"] ?? '',
+        identificationImage: json["identification_image"] ?? '',
+        identificationType: json["identification_type"] ?? '',
         isAdmin: json["is_admin"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        deletedAt: json["deleted_at"] == null
-            ? null
-            : DateTime.tryParse(json["deleted_at"]),
+        name: json["name"] ?? '',
+        phoneNumber: json["phone_number"] ?? '',
+        addressProofImage: json["address_proof_image"] ?? '',
+        createdAt: (json['created_at'] as Timestamp).toDate(),
+        accounts:
+            isAccountsLoaded ? (json['accounts'] ?? <Account>[]) : <Account>[],
+        bankAccounts: json['bank_accounts'],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson({bool isToStoreInLocal = false}) => {
         "id": id,
-        "name": name,
-        "username": username,
-        "phone_number": phoneNumber,
-        "image": image,
+        "address": address,
+        "status": status,
+        "birthday_date": isToStoreInLocal
+            ? birthdayDate.toIso8601String()
+            : Timestamp.fromDate(birthdayDate),
+        "email": email,
+        "face_image": faceImage,
+        "identification": identification,
+        "identification_image": identificationImage,
+        "identification_type": identificationType,
         "is_admin": isAdmin,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
-        "deleted_at": deletedAt?.toIso8601String(),
+        "name": name,
+        "phone_number": phoneNumber,
+        "address_proof_image": addressProofImage,
+        "created_at": isToStoreInLocal
+            ? createdAt.toIso8601String()
+            : Timestamp.fromDate(createdAt),
       };
+
+  Color getColorByStatus() {
+    if (status == 'Verificado') return Constants.green;
+    return Constants.red;
+  }
+
+  bool isVerified() => status == 'Verificado';
 }

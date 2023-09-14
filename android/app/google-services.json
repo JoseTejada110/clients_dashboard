@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "285444618426",
+    "project_id": "investments-dashboard-clients",
+    "storage_bucket": "investments-dashboard-clients.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285444618426:android:cde62238725af4c143aa83",
+        "android_client_info": {
+          "package_name": "com.example.skeleton_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285444618426-d44ii0tfso2u2uda7fsur8jqjci3qpdm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_Iuicgm1yfb4gLLDGOcLsAbLnqRObvDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285444618426-d44ii0tfso2u2uda7fsur8jqjci3qpdm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "285444618426-7hj2fj61m66459f0v3ve1jq9r2nabjhd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.skeletonApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285444618426:android:33663f7b47c7795c43aa83",
+        "android_client_info": {
+          "package_name": "com.nuacventurecapital.nuactransfer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285444618426-d44ii0tfso2u2uda7fsur8jqjci3qpdm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_Iuicgm1yfb4gLLDGOcLsAbLnqRObvDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285444618426-d44ii0tfso2u2uda7fsur8jqjci3qpdm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "285444618426-7hj2fj61m66459f0v3ve1jq9r2nabjhd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.skeletonApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

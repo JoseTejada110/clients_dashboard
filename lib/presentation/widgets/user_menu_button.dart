@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/instance_manager.dart';
+import 'package:get/route_manager.dart';
 import 'package:skeleton_app/domain/entities/menu_item_class.dart';
+import 'package:skeleton_app/presentation/home/home_controller.dart';
+import 'package:skeleton_app/presentation/routes/app_navigation.dart';
 import 'package:skeleton_app/presentation/widgets/custom_buttons.dart';
 
 class UserMenuButton extends StatelessWidget {
@@ -39,6 +43,17 @@ class UserMenuButton extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
               ),
+              onPressed: () {
+                switch (element.title) {
+                  case 'Perfil':
+                    Get.toNamed(AppRoutes.profile);
+                    break;
+                  case 'Cerrar Sesión':
+                    Get.delete<HomeController>(force: true);
+                    Get.offAllNamed(AppRoutes.login);
+                    break;
+                }
+              },
             ),
           )
           .toList(),

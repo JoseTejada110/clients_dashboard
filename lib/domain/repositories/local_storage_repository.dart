@@ -15,7 +15,7 @@ abstract class LocalStorageRepositoryInterface {
   Future<Map<String, String?>> readToken();
 
   Future storeUser(String userJson);
-  Future<User?> readUser();
+  Future<UserModel?> readUser();
 
   Future deleteAuthData();
 }

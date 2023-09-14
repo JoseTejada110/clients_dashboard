@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:skeleton_app/domain/repositories/local_storage_repository.dart';
-import 'package:skeleton_app/presentation/routes/app_navigation.dart';
 
 class SplashController extends GetxController {
   SplashController({required this.localStorageRepository});
@@ -11,7 +10,7 @@ class SplashController extends GetxController {
   @override
   void onInit() async {
     await _loadLanguage();
-    Get.offAllNamed(AppRoutes.login);
+    // Get.offAllNamed(AppRoutes.login);
     super.onInit();
   }
 

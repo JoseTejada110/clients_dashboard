@@ -15,7 +15,7 @@ import 'package:skeleton_app/presentation/customer/portfolio/customer_portfolio_
 class HomeController extends GetxController {
   HomeController({required this.apiRepository, required this.user});
   final ApiRepositoryInteface apiRepository;
-  final User user;
+  final UserModel user;
 
   PageController pageController = PageController();
   RxInt currentIndex = 0.obs;
@@ -25,7 +25,7 @@ class HomeController extends GetxController {
   }
 
   List<Widget> getHomeChildren() {
-    if (user.isAdmin == 1) {
+    if (user.isAdmin) {
       return const [
         AdminDashboardPage(),
         AdminClientsPage(),
@@ -42,7 +42,7 @@ class HomeController extends GetxController {
   }
 
   List<BottomNavigationBarItem> getMenuItems() {
-    if (user.isAdmin == 1) {
+    if (user.isAdmin) {
       return const [
         BottomNavigationBarItem(
           icon: Icon(Icons.dashboard),

@@ -8,6 +8,11 @@ class DataParsingException implements Exception {
   final Map<String, dynamic>? message;
 }
 
+class EmptyResultException implements Exception {
+  EmptyResultException({this.message});
+  final Map<String, dynamic>? message;
+}
+
 class NoConnectionException implements Exception {
   NoConnectionException({this.message});
   final Map<String, dynamic>? message;

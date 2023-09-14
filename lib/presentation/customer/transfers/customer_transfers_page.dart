@@ -38,7 +38,7 @@ class CustomerTransfersPage extends StatelessWidget {
                 '¡Deposita fondos a tu cuenta e inicia a invertir ahora!',
               ),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () => Get.toNamed(AppRoutes.createTransfer),
+              onTap: () => Get.toNamed(AppRoutes.depositFunds),
             ),
             const Divider(),
             ListTile(
@@ -48,7 +48,18 @@ class CustomerTransfersPage extends StatelessWidget {
               ),
               subtitle: const Text('Realizar solicitud de retiro de efectivo.'),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () => Get.toNamed(AppRoutes.createTransfer),
+              onTap: () => Get.toNamed(AppRoutes.withdraw),
+            ),
+            const Divider(),
+            ListTile(
+              title: const Text(
+                'Mis Transacciones',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: const Text(
+                  'Visualiza el histórico de transacciones y el estado de tus transacciones recientes.'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Get.toNamed(AppRoutes.customerTransactions),
             ),
           ],
         ),
