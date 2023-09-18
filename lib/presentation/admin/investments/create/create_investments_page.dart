@@ -19,7 +19,9 @@ class CreateInvestmentsPage extends GetView<CreateInvestmentsController> {
       onTap: () => Utils.unfocus(context),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Crear Inversión'),
+          title: Text(
+            '${controller.investment == null ? 'Crear' : 'Editar'} Inversión',
+          ),
         ),
         body: CustomCard(
           child: ListView(
@@ -114,7 +116,9 @@ class CreateInvestmentsPage extends GetView<CreateInvestmentsController> {
                 width: double.infinity,
                 child: FilledButton(
                   onPressed: controller.createInvestment,
-                  child: const Text('Crear Inversión'),
+                  child: Text(
+                    '${controller.investment == null ? 'Crear' : 'Editar'} Inversión',
+                  ),
                 ),
               ),
             ],

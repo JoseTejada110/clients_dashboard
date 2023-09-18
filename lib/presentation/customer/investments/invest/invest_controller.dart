@@ -89,7 +89,6 @@ class InvestController extends GetxController with StateMixin {
       (l) => MessagesUtils.errorDialog(l, tryAgain: confirmInvestment),
       (r) {
         if (r == null) {
-          // TODO: Actualizar saldo disponible de la cuenta
           Get.dialog(
             DialogErrorPlaceholcer(
               message: const ErrorResponse(
@@ -144,6 +143,7 @@ class InvestController extends GetxController with StateMixin {
       'transaction_by': Utils.getUserReference(),
       'bank_account_name': '',
       'bank_account_number': '',
+      'transaction_type': 'Inversión',
     };
 
     // Ejecutando transacción
@@ -153,7 +153,10 @@ class InvestController extends GetxController with StateMixin {
       final clientAccount = Account.fromJson(
         clientValue.data()!..addAll({'id': clientValue.id}),
       );
-      if (clientAccount.getAvailableBalance() < amount) return null;
+      if (clientAccount.getAvailableBalance() < amount) {
+        user.accounts.first = clientAccount;
+        return null;
+      }
 
       transaction.update(
         clientAccountRef,

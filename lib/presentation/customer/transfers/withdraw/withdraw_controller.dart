@@ -149,6 +149,7 @@ class WithdrawController extends GetxController with StateMixin {
       'transaction_by': Utils.getUserReference(),
       'bank_account_name': selectedBank.value!.bankName,
       'bank_account_number': selectedBank.value!.accountNumber,
+      'transaction_type': 'Retiro',
     };
 
     return db.runTransaction(

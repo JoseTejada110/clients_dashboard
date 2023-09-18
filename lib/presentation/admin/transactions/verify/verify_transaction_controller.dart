@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_notifier.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
@@ -36,6 +37,19 @@ class VerifyTransactionController extends GetxController with StateMixin {
 
   late AppTransaction transaction;
   late UserModel customer;
+
+  void showConfirmation(BuildContext context) async {
+    await MessagesUtils.showConfirmation(
+      context: context,
+      title: 'Confirmar Transacción',
+      subtitle: const Text('¿Seguro que desea confirmar esta transacción?'),
+      onConfirm: () {
+        Navigator.pop(context);
+        processTransaction();
+      },
+      onCancel: Get.back,
+    );
+  }
 
   Future<void> processTransaction() async {
     MessagesUtils.showLoading(message: 'Procesando...');
@@ -93,31 +107,35 @@ class VerifyTransactionController extends GetxController with StateMixin {
       final adminAccount = Account.fromJson(
         adminValue.data()!..addAll({'id': adminValue.id}),
       );
+      // TODO: quitar esta línea
       if (adminAccount.netBalance < transaction.amount) return false;
 
       // Actualizando el balance de la cuenta del administrador
-      print(transaction.destinationType == 'Débito');
-      firebaseTransaction.update(
-        adminAccountRef,
-        // {'net_balance': adminAccount.netBalance - transaction.amount},
-        // TODO: Depurar el porqué se disminuye el monto del administrador
-        {
-          'net_balance': FieldValue.increment(
-              transaction.destinationType == 'Débito'
-                  ? -transaction.amount
-                  : transaction.amount)
-        },
-      );
-
-      // Actualizando el balance de la cuenta del cliente
-      firebaseTransaction.update(
-        clientAccountRef,
-        {
-          'net_balance': FieldValue.increment(transaction.originType == 'Débito'
-              ? -transaction.amount
-              : transaction.amount),
-        },
-      );
+      switch (transaction.transactionType) {
+        case 'Depósito':
+          firebaseTransaction.update(
+            adminAccountRef,
+            {'net_balance': FieldValue.increment(transaction.amount)},
+          );
+          firebaseTransaction.update(
+            clientAccountRef,
+            {'transit_amount': FieldValue.increment(-transaction.amount)},
+          );
+          break;
+        case 'Retiro':
+          firebaseTransaction.update(
+            adminAccountRef,
+            {'net_balance': FieldValue.increment(-transaction.amount)},
+          );
+          firebaseTransaction.update(
+            clientAccountRef,
+            {
+              'net_balance': FieldValue.increment(-transaction.amount),
+              'frozen_amount': FieldValue.increment(-transaction.amount),
+            },
+          );
+          break;
+      }
 
       // Actualizar estado de la transacción y establecer por quién fue procesada
       firebaseTransaction.update(

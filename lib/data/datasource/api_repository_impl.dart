@@ -187,7 +187,19 @@ class ApiRepositoryImpl extends ApiRepositoryInteface {
           await firestoreInstance.collection('/accounts').add({
         'net_balance': 0,
         'invested_amount': 0,
+        'frozen_amount': 0,
+        'transit_amount': 0,
       });
+
+      // VERIFICANDO SI EXISTE UN REFERIDO EN EL REGISTRO
+      if (userData['referred_by'] != null) {
+        firestoreInstance.collection('referrals').add({
+          'date': FieldValue.serverTimestamp(),
+          'referred_by': userData['referred_by'],
+          'referred_to': firestoreInstance.collection('users').doc(uid),
+          'referred_to_name': userData['name'],
+        });
+      }
 
       // CREANDO USUARIO EN LA BASE DE DATOS
       userData.addAll({

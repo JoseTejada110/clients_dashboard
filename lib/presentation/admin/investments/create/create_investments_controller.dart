@@ -8,6 +8,7 @@ import 'package:skeleton_app/data/models/investment_model.dart';
 import 'package:skeleton_app/domain/repositories/api_repository.dart';
 import 'package:skeleton_app/domain/requests/firebase_params_request.dart';
 import 'package:skeleton_app/domain/usecases/general_usecase.dart';
+import 'package:skeleton_app/domain/usecases/notifications_usecase.dart';
 import 'package:skeleton_app/presentation/admin/investments/admin_investments_controller.dart';
 
 class CreateInvestmentsController extends GetxController {
@@ -50,55 +51,68 @@ class CreateInvestmentsController extends GetxController {
   void switchIsAvailable(bool? value) => isAvailable.value = value ?? false;
 
   Future<void> createInvestment() async {
-    // TODO: Editar cuando corresponda
     MessagesUtils.showLoading();
-    final newInvestment = Investment(
-      id: '',
-      createdBy: FirebaseFirestore.instance
-          .collection('users')
-          .doc(Utils.getUser().id),
-      name: investmentNameController.text,
-      minimumInvestment: Utils.parseControllerText(minAmountController.text),
-      maximumInvestment: Utils.parseControllerText(maxAmountController.text),
-      returnPercentage:
-          Utils.parseControllerText(investmentReturnController.text),
-      createdAt: DateTime.now(),
-      initialDate: beginDate.value,
-      endDate: endDate.value,
-      isAvailable: isAvailable.value,
-    );
+    final returnPercentage =
+        Utils.parseControllerText(investmentReturnController.text);
+    final db = FirebaseFirestore.instance;
+    final investmentData = {
+      'created_by': db.collection('users').doc(Utils.getUser().id),
+      'name': investmentNameController.text,
+      'minimum_investment': Utils.parseControllerText(minAmountController.text),
+      'maximum_investment': Utils.parseControllerText(maxAmountController.text),
+      'return_percentage': returnPercentage,
+      'created_at': Timestamp.fromDate(DateTime.now()),
+      'initial_date': Timestamp.fromDate(beginDate.value),
+      'end_date': Timestamp.fromDate(endDate.value),
+      'is_available': isAvailable.value,
+    };
     final params = FirebaseParamsRequest(
       collection: 'investments',
-      data: newInvestment.toJson(),
+      documentReference: investment == null
+          ? null
+          : db.collection('investments').doc(investment!.id),
+      data: investmentData,
     );
     final result = await GeneralUsecase(apiRepository).writeData(params);
     MessagesUtils.dismissLoading();
     result.fold(
-      (l) {
-        print('l: $l');
-        MessagesUtils.errorDialog(l, tryAgain: createInvestment);
-      },
+      (l) => MessagesUtils.errorDialog(l, tryAgain: createInvestment),
       (r) {
-        // TODO: NOTIFICAR A TODOS LOS USUARIOS!
-        print('r: $r');
+        investmentData.addAll({'id': r});
+
+        // Enviando notificación
+        if (isAvailable.value && investment == null) {
+          NotificationUsecase().sendNotificationToTopic(
+            '¡Nueva inversión disponible!',
+            'Descubre nuestra última oportunidad de inversión con una rentabilidad del ${Constants.decimalFormat.format(returnPercentage)}%.',
+            AvailableTopic.allClients.name,
+          );
+        }
+
+        final isEditing = investment != null;
+        final investmentResult = Investment.fromJson(investmentData);
+        if (isEditing) {
+          final investmentController = Get.find<AdminInvestmentsController>();
+          // final indexToReplace = bankController.banks.indexOf(bank);
+          final indexToReplace = investmentController.investments.indexWhere(
+            (element) => element.id == investment!.id,
+          );
+          investmentController.investments.removeAt(indexToReplace);
+          investmentController.investments
+              .insert(indexToReplace, investmentResult);
+          investmentController.refresh();
+        } else {
+          Get.find<AdminInvestmentsController>()
+              .investments
+              .insert(0, investmentResult);
+        }
+
+        Get.back();
         MessagesUtils.successSnackbar(
-          'Inversión Creada',
-          'La inversión ha sido creada con éxito.',
+          'Inversión ${isEditing ? 'Editada' : 'Creada'}',
+          'La inversión ha sido ${isEditing ? 'editada' : 'creada'} con éxito.',
         );
-        newInvestment.id = r;
-        Get.find<AdminInvestmentsController>().investments.add(newInvestment);
-        resetForm();
       },
     );
-  }
-
-  void resetForm() {
-    investmentNameController.clear();
-    investmentReturnController.clear();
-    minAmountController.text = '1.00';
-    maxAmountController.text = '1.00';
-    beginDate.value = DateTime.now();
-    endDate.value = DateTime.now();
-    isAvailable.value = true;
   }
 }

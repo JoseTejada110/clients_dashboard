@@ -57,8 +57,32 @@ class CustomerHomePage extends StatelessWidget {
                     title: 'Balance \nDisponible',
                     data: NumberFormat.simpleCurrency()
                         .format(userAccount.getAvailableBalance()),
-                    icon: Icons.people,
+                    icon: Icons.money,
                     iconBackgroundColor: Constants.blue,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: DashboardCard(
+                    title: 'Balance en \nTránsito',
+                    data: NumberFormat.simpleCurrency()
+                        .format(userAccount.transitAmount),
+                    icon: Icons.watch_later_outlined,
+                    iconBackgroundColor: Constants.secondaryColor,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: DashboardCard(
+                    title: 'Balance \nFrizado',
+                    data: NumberFormat.simpleCurrency()
+                        .format(userAccount.frozenAmount),
+                    icon: Icons.lock_outline,
+                    iconBackgroundColor: Constants.red,
                   ),
                 ),
               ],
@@ -91,10 +115,10 @@ class CustomerHomePage extends StatelessWidget {
             const SizedBox(height: 20),
             _LineChart(
               chartData: [
-                ChartData(y1: 18000, x1: '05/2023'),
-                ChartData(y1: 17000, x1: '06/2023'),
-                ChartData(y1: 20250, x1: '07/2023'),
-                ChartData(y1: 21000, x1: '08/2023'),
+                ChartData(y1: 0, x1: '05/2023'), //18000
+                ChartData(y1: 0, x1: '06/2023'), //17000
+                ChartData(y1: 0, x1: '07/2023'), //20250
+                ChartData(y1: 0, x1: '08/2023'), //21000
               ],
             ),
             const SizedBox(height: 20),
@@ -130,7 +154,7 @@ class _LineChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCard(
       padding: Constants.bodyPadding,
-      height: 320,
+      height: 300,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

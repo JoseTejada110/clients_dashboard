@@ -477,7 +477,7 @@
 				DEVELOPMENT_TEAM = 3YJRRQ4QXG;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = NuacTransfer;
+				INFOPLIST_KEY_CFBundleDisplayName = "Bisonte App";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -658,7 +658,7 @@
 				DEVELOPMENT_TEAM = 3YJRRQ4QXG;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = NuacTransfer;
+				INFOPLIST_KEY_CFBundleDisplayName = "Bisonte App";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -683,7 +683,7 @@
 				DEVELOPMENT_TEAM = 3YJRRQ4QXG;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = NuacTransfer;
+				INFOPLIST_KEY_CFBundleDisplayName = "Bisonte App";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

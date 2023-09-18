@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:intl/intl.dart';
 import 'package:skeleton_app/core/constants.dart';
 import 'package:skeleton_app/core/utils/utils.dart';
 import 'package:skeleton_app/presentation/referrals/referrals_controller.dart';
@@ -46,14 +44,14 @@ class ReferralsPage extends GetView<ReferralsController> {
                   ),
                 ),
                 subtitle: Text(Constants.dateFormat.format(referral.date)),
-                trailing: Text(
-                  NumberFormat.simpleCurrency().format(referral.earned),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: Constants.green,
-                  ),
-                ),
+                // trailing: Text(
+                //   NumberFormat.simpleCurrency().format(referral.earned),
+                //   style: const TextStyle(
+                //     fontWeight: FontWeight.bold,
+                //     fontSize: 15,
+                //     color: Constants.green,
+                //   ),
+                // ),
               );
             },
             separatorBuilder: (BuildContext context, int index) =>

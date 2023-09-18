@@ -20,7 +20,7 @@ class Referral {
         id: json['id'],
         referredBy: json['referred_by'],
         referredTo: json['referred_to'],
-        earned: (json['earned']).toDouble(),
+        earned: (json['earned'] ?? 0).toDouble(),
         referredToName: json['referred_to_name'] ?? '',
         date: (json['date'] as Timestamp).toDate(),
       );

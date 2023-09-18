@@ -7,6 +7,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/route_manager.dart';
 import 'package:skeleton_app/core/utils/messages_utils.dart';
 import 'package:skeleton_app/domain/repositories/api_repository.dart';
+import 'package:skeleton_app/domain/usecases/notifications_usecase.dart';
 import 'package:skeleton_app/domain/usecases/signup_usecase.dart';
 import 'package:skeleton_app/presentation/routes/app_navigation.dart';
 
@@ -222,10 +223,9 @@ class SignUpController extends GetxController {
       userData.addAll({
         'referred_by': FirebaseFirestore.instance
             .collection('users')
-            .doc('ITfcSRsqrqpbGUUlFnwQ'),
+            .doc(referralCodeController.text),
       });
     }
-    print(userData);
     final result = await SignupUsecase(apiRepository).signupUser(
       emailController.text,
       passController.text,
@@ -236,12 +236,13 @@ class SignUpController extends GetxController {
     );
     MessagesUtils.dismissLoading();
     result.fold(
-      (l) {
-        print(l);
-        MessagesUtils.errorDialog(l, tryAgain: createUser);
-      },
+      (l) => MessagesUtils.errorDialog(l, tryAgain: createUser),
       (r) {
-        print(r);
+        NotificationUsecase().sendNotificationToTopic(
+          '¡Nuevo usuario registrado!',
+          'Hay un nuevo usuario esperando por tú verificación. ¡Ingresa a la app y verifícalo ahora!',
+          AvailableTopic.allAdmins.name,
+        );
         Get.offNamed(AppRoutes.successfulSignup);
       },
     );

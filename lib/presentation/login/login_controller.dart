@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_notifier.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
@@ -91,9 +94,14 @@ class LoginController extends GetxController with StateMixin {
           usernameController.text,
           passwordController.text,
         );
-        NotificationUsecase().subscribeToTopic(
-          result.isAdmin ? AvailableTopic.allAdmins : AvailableTopic.allClients,
-        );
+        if (await NotificationUsecase().requestNotificationPermission()) {
+          NotificationUsecase().subscribeToTopic(
+            result.isAdmin
+                ? AvailableTopic.allAdmins
+                : AvailableTopic.allClients,
+          );
+          _saveUserDeviceToken(result.id);
+        }
         MessagesUtils.dismissLoading();
         localRepository.storeUser(
           jsonEncode(result.toJson(isToStoreInLocal: true)),
@@ -101,5 +109,23 @@ class LoginController extends GetxController with StateMixin {
         return result;
       },
     );
+  }
+
+  Future<void> _saveUserDeviceToken(String uid) async {
+    print('UID: $uid');
+    final token = await NotificationUsecase().getDeviceToken();
+    print('TOKEN: $token');
+    if (token != null) {
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .collection('tokens')
+          .doc(token)
+          .set({
+        'date': FieldValue.serverTimestamp(),
+        'token': token,
+        'platform': Platform.operatingSystem,
+      });
+    }
   }
 }

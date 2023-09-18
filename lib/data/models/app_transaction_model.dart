@@ -12,6 +12,7 @@ class AppTransaction {
     required this.processedBy,
     required this.amount,
     required this.concept,
+    required this.transactionType,
     required this.originType,
     required this.destinationType,
     required this.date,
@@ -28,6 +29,7 @@ class AppTransaction {
   final DocumentReference<Map<String, dynamic>>? processedBy;
   final double amount;
   final String concept;
+  final String transactionType;
   final String originType;
   final String destinationType;
   final DateTime date;
@@ -45,6 +47,8 @@ class AppTransaction {
         processedBy: json['processed_by'],
         amount: (json['amount']).toDouble(),
         concept: json['concept'] ?? '',
+        transactionType:
+            json['transaction_type'] ?? '', //Depósito -- Retiro -- Inversión
         originType: json['origin_type'] ?? '',
         destinationType: json['origin_type'] ?? '',
         date: (json['date'] as Timestamp).toDate(),

@@ -33,3 +33,22 @@ exports.sendNotificationToTopic = onCall((data, context) => {
         return false;
     });
 });
+
+exports.sendNotificationToUser = onCall((data, context) => {
+    const {title, message, tokens} = data.data;
+    const payload = {
+        tokens: tokens,
+        notification: {
+            title: title,
+            body: message
+        }
+    };
+
+    admin.messaging().sendEachForMulticast(payload)
+    .then((result) => {
+        return true;
+    })
+    .catch((error) => {
+        return false;
+    });
+});

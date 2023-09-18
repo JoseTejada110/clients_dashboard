@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:rive/rive.dart';
+import 'package:skeleton_app/presentation/login/login_binding.dart';
+import 'package:skeleton_app/presentation/login/login_page.dart';
 import 'package:skeleton_app/presentation/routes/app_navigation.dart';
 import 'package:skeleton_app/presentation/widgets/custom_buttons.dart';
 
@@ -45,7 +47,10 @@ class SuccessfulSignupPage extends StatelessWidget {
           ),
           CustomBottomButton(
             title: 'Ir a Inicio',
-            onTap: () => Get.offAllNamed(AppRoutes.login),
+            onTap: () => Get.offAll(
+              () => const LoginPage(),
+              binding: LoginBinding(),
+            ),
           ),
         ],
       ),

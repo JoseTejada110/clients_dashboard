@@ -115,7 +115,7 @@ class VerifyTransactionPage extends GetView<VerifyTransactionController> {
                       child: FilledButton(
                         onPressed: controller.transaction.status == 'Procesada'
                             ? null
-                            : controller.processTransaction,
+                            : () => controller.showConfirmation(context),
                         child: const Text('Procesar Transacción'),
                       ),
                     ),

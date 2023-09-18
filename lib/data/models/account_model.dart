@@ -27,7 +27,8 @@ class Account {
     );
   }
 
-  double getAvailableBalance() => netBalance - (investedAmount + frozenAmount);
+  double getAvailableBalance() =>
+      netBalance - (investedAmount + frozenAmount + transitAmount);
   double getTotalEarningsProjection() {
     return accountInvestments.fold<double>(
       0.0,

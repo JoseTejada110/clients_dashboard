@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/instance_manager.dart';
+import 'package:skeleton_app/core/utils/messages_utils.dart';
 import 'package:skeleton_app/presentation/home/home_controller.dart';
 
 import '../../data/models/user_model.dart';
@@ -17,6 +19,15 @@ class Utils {
     return double.tryParse(
             text?.replaceAll(',', '').replaceAll('\$', '') ?? '0.0') ??
         0.0;
+  }
+
+  static void copyToClipboard(
+    String text,
+    String successTitle,
+    String successMessage,
+  ) async {
+    await Clipboard.setData(ClipboardData(text: text));
+    MessagesUtils.successSnackbar(successTitle, successMessage);
   }
 
   static bool isNumeric(String? string) {

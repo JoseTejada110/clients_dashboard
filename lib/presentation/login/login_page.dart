@@ -5,18 +5,17 @@ import 'package:skeleton_app/core/utils/utils.dart';
 import 'package:skeleton_app/presentation/home/home_controller.dart';
 import 'package:skeleton_app/presentation/login/login_controller.dart';
 import 'package:skeleton_app/presentation/routes/app_navigation.dart';
+import 'package:skeleton_app/presentation/signup/signup_binding.dart';
+import 'package:skeleton_app/presentation/signup/signup_page.dart';
 import 'package:skeleton_app/presentation/widgets/custom_buttons.dart';
 import 'package:skeleton_app/presentation/widgets/custom_input.dart';
 import 'package:skeleton_app/presentation/widgets/input_title.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(
-      LoginController(apiRepository: Get.find(), localRepository: Get.find()),
-    );
     final themeData = Theme.of(context);
     return GestureDetector(
       onTap: () => Utils.unfocus(context),
@@ -93,6 +92,13 @@ class LoginPage extends StatelessWidget {
                       child: FilledButton(
                         onPressed: loginAndGoToHome,
                         child: const Text('Iniciar Sesión'),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Center(
+                      child: CustomTextButton(
+                        title: '¿Olvidaste tú contraseña?',
+                        onPressed: () => Get.toNamed(AppRoutes.forgotPassword),
                       ),
                     ),
                     const SizedBox(height: 10),

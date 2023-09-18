@@ -1,5 +1,4 @@
 import 'package:get/route_manager.dart';
-import 'package:go_router/go_router.dart';
 import 'package:skeleton_app/presentation/admin/bulk_notification/bulk_notification_binding.dart';
 import 'package:skeleton_app/presentation/admin/bulk_notification/bulk_notification_page.dart';
 import 'package:skeleton_app/presentation/admin/clients/verify/verify_binding.dart';
@@ -22,6 +21,8 @@ import 'package:skeleton_app/presentation/customer/transfers/transactions/custom
 import 'package:skeleton_app/presentation/customer/transfers/transactions/customer_transactions_page.dart';
 import 'package:skeleton_app/presentation/customer/transfers/withdraw/withdraw_binding.dart';
 import 'package:skeleton_app/presentation/customer/transfers/withdraw/withdraw_page.dart';
+import 'package:skeleton_app/presentation/forgot_password/forgot_password_binding.dart';
+import 'package:skeleton_app/presentation/forgot_password/forgot_password_page.dart';
 import 'package:skeleton_app/presentation/home/home_page.dart';
 import 'package:skeleton_app/presentation/login/login_binding.dart';
 import 'package:skeleton_app/presentation/login/login_page.dart';
@@ -40,6 +41,7 @@ import 'package:skeleton_app/presentation/support/support_page.dart';
 class AppRoutes {
   static const String splash = '/splash';
   static const String login = '/login';
+  static const String forgotPassword = '/forgotPassword';
   static const String signUp = '/signUp';
   static const String successfulSignup = '/successfulSignup';
   static const String home = '/home';
@@ -75,6 +77,11 @@ class AppPages {
       name: AppRoutes.login,
       page: () => const LoginPage(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.forgotPassword,
+      page: () => const ForgotPasswordPage(),
+      binding: ForgotPasswordBinding(),
     ),
     GetPage(
       name: AppRoutes.signUp,
@@ -166,20 +173,21 @@ class AppPages {
   ];
 }
 
-final router = GoRouter(
-  initialLocation: '/splash',
-  routes: [
-    GoRoute(
-      path: AppRoutes.splash,
-      builder: (context, state) => const SplashPage(),
-    ),
-    GoRoute(
-      path: AppRoutes.login,
-      builder: (context, state) => const LoginPage(),
-    ),
-    GoRoute(
-      path: AppRoutes.signUp,
-      builder: (context, state) => const SignUpPage(),
-    ),
-  ],
-);
+// final router = GoRouter(
+//   navigatorKey: Get.key,
+//   initialLocation: '/splash',
+//   routes: [
+//     GoRoute(
+//       path: AppRoutes.splash,
+//       builder: (context, state) => const SplashPage(),
+//     ),
+//     GoRoute(
+//       path: AppRoutes.login,
+//       builder: (context, state) => const LoginPage(),
+//     ),
+//     GoRoute(
+//       path: AppRoutes.signUp,
+//       builder: (context, state) => const SignUpPage(),
+//     ),
+//   ],
+// );

@@ -54,10 +54,12 @@ class ProfilePage extends GetView<ProfileController> {
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
                     icon: const Icon(Icons.copy),
-                    label: const Text('Copiar enlace de referido'),
-                    onPressed: () {
-                      //TODO: Copiar al portapapeles el enlace para referir
-                    },
+                    label: const Text('Copiar código de referido'),
+                    onPressed: () => Utils.copyToClipboard(
+                      user.id,
+                      'Código Copiado',
+                      'Código de referido copiado al portapapeles.',
+                    ),
                   ),
                 ],
               ),

@@ -31,6 +31,7 @@ class AdminDashboardController extends GetxController with StateMixin {
   }
 
   Future<bool> _queries() async {
+    // TODO: Actualizar datos de la cuenta
     try {
       final db = FirebaseFirestore.instance;
       final pendingTransactionsFuture = db

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
@@ -49,6 +50,7 @@ class UserMenuButton extends StatelessWidget {
                     Get.toNamed(AppRoutes.profile);
                     break;
                   case 'Cerrar Sesión':
+                    FirebaseAuth.instance.signOut();
                     Get.delete<HomeController>(force: true);
                     Get.offAllNamed(AppRoutes.login);
                     break;

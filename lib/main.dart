@@ -28,13 +28,12 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Skeleton App',
+    return GetMaterialApp(
+      title: 'Bisonte App',
       debugShowCheckedModeBanner: false,
-      routerConfig: router,
-      // getPages: AppPages.pages,
-      // initialRoute: AppRoutes.splash,
-      // initialBinding: MainBinding(),
+      getPages: AppPages.pages,
+      initialRoute: AppRoutes.splash,
+      initialBinding: MainBinding(),
 
       //Estableciendo el tema de la app
       theme: appTheme,

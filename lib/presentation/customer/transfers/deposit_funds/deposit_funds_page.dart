@@ -60,7 +60,6 @@ class DepositFundsPage extends GetView<DepositFundsController> {
                       'Para financiar tu cuenta necesitarás iniciar la transferencia bancaria en tu banco u otra institución financiera utilizando la siguiente información.',
                     ),
                     const SizedBox(height: 5),
-                    // TODO: Copiar al portapapeles al hacer click
                     _buildRichText(
                       'Banco: ',
                       controller.bankData?['bank_name'] ?? '',
@@ -72,14 +71,29 @@ class DepositFundsPage extends GetView<DepositFundsController> {
                     _buildRichText(
                       'ABA Routing number: ',
                       controller.bankData?['routing_number'] ?? '',
+                      onTap: () => Utils.copyToClipboard(
+                        controller.bankData?['routing_number'] ?? '',
+                        'Routing Number Copiado',
+                        'Routing number copiado al portapapeles',
+                      ),
                     ),
                     _buildRichText(
                       'Beneficiario: ',
                       controller.bankData?['beneficiary_name'] ?? '',
+                      onTap: () => Utils.copyToClipboard(
+                        controller.bankData?['beneficiary_name'] ?? '',
+                        'Beneficiario Copiado',
+                        'Beneficiario copiado al portapapeles',
+                      ),
                     ),
                     _buildRichText(
                       'Número de cuenta del beneficiario: ',
                       controller.bankData?['account_number'] ?? '',
+                      onTap: () => Utils.copyToClipboard(
+                        controller.bankData?['account_number'] ?? '',
+                        'Número de Cuenta Copiado',
+                        'Número de cuenta copiado al portapapeles',
+                      ),
                     ),
                   ],
                 ),
@@ -154,16 +168,39 @@ class DepositFundsPage extends GetView<DepositFundsController> {
     controller.addBank(createdBank as Bank);
   }
 
-  Widget _buildRichText(String title, String data) {
-    return RichText(
-      text: TextSpan(
-        text: title,
-        style: const TextStyle(fontWeight: FontWeight.bold),
+  Widget _buildRichText(String title, String data, {VoidCallback? onTap}) {
+    return InkWell(
+      onTap: onTap,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          TextSpan(
-            text: data,
-            style: const TextStyle(fontWeight: FontWeight.normal),
+          Flexible(
+            child: RichText(
+              text: TextSpan(
+                text: title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: onTap != null ? Constants.darkIndicatorColor : null,
+                ),
+                children: [
+                  TextSpan(
+                    text: data,
+                    style: const TextStyle(fontWeight: FontWeight.normal),
+                  ),
+                ],
+              ),
+            ),
           ),
+          onTap != null
+              ? const Padding(
+                  padding: EdgeInsets.only(left: 5),
+                  child: Icon(
+                    Icons.copy,
+                    size: 15,
+                    color: Constants.darkIndicatorColor,
+                  ),
+                )
+              : const SizedBox()
         ],
       ),
     );

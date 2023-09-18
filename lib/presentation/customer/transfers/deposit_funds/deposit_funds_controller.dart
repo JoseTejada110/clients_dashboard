@@ -114,6 +114,7 @@ class DepositFundsController extends GetxController with StateMixin {
       'transaction_by': Utils.getUserReference(),
       'bank_account_name': selectedBank.value!.bankName,
       'bank_account_number': selectedBank.value!.accountNumber,
+      'transaction_type': 'Depósito',
     };
 
     // Almacenando el cheque
@@ -130,7 +131,10 @@ class DepositFundsController extends GetxController with StateMixin {
         //Actualizando el monto en tránsito del cliente
         transaction.update(
           clientAccountRef,
-          {'transit_amount': FieldValue.increment(amount)},
+          {
+            'net_balance': FieldValue.increment(amount),
+            'transit_amount': FieldValue.increment(amount),
+          },
         );
         user.accounts.first.transitAmount += amount;
 
@@ -154,6 +158,14 @@ class DepositFundsController extends GetxController with StateMixin {
 
   bool _validateFields() {
     ErrorResponse? error;
+    if (!Utils.getUser().isVerified()) {
+      error = const ErrorResponse(
+        title: 'No Verificado',
+        message: 'Debes estar verificado para realizar un depósito',
+      );
+      Get.dialog(DialogErrorPlaceholcer(message: error));
+      return false;
+    }
     if (selectedBank.value == null) {
       error = const ErrorResponse(
         title: 'Introduce el banco',
