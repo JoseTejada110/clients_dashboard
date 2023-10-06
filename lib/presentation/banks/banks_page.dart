@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/route_manager.dart';
-import 'package:skeleton_app/presentation/banks/banks_controller.dart';
-import 'package:skeleton_app/presentation/routes/app_navigation.dart';
-import 'package:skeleton_app/presentation/widgets/custom_card.dart';
-import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
+import 'package:bisonte_app/presentation/banks/banks_controller.dart';
+import 'package:bisonte_app/presentation/routes/app_navigation.dart';
+import 'package:bisonte_app/presentation/widgets/custom_card.dart';
+import 'package:bisonte_app/presentation/widgets/placeholders_widgets.dart';
 
 class BanksPage extends GetView<BanksController> {
   const BanksPage({super.key});

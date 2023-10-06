@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:skeleton_app/presentation/widgets/image_full_screen_wrapper.dart';
-import 'package:skeleton_app/presentation/widgets/upload_file_button.dart';
+import 'package:bisonte_app/presentation/widgets/image_full_screen_wrapper.dart';
+import 'package:bisonte_app/presentation/widgets/upload_file_button.dart';
 
 class ImagePickerContainer extends StatelessWidget {
   const ImagePickerContainer({

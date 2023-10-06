@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/route_manager.dart';
-import 'package:skeleton_app/core/error_handling/failures.dart';
-import 'package:skeleton_app/core/utils/messages_utils.dart';
-import 'package:skeleton_app/core/utils/utils.dart';
-import 'package:skeleton_app/data/models/user_model.dart';
-import 'package:skeleton_app/domain/repositories/api_repository.dart';
-import 'package:skeleton_app/domain/requests/firebase_params_request.dart';
-import 'package:skeleton_app/domain/usecases/general_usecase.dart';
-import 'package:skeleton_app/domain/usecases/notifications_usecase.dart';
-import 'package:skeleton_app/presentation/admin/clients/admin_clients_controller.dart';
-import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
+import 'package:bisonte_app/core/error_handling/failures.dart';
+import 'package:bisonte_app/core/utils/messages_utils.dart';
+import 'package:bisonte_app/core/utils/utils.dart';
+import 'package:bisonte_app/data/models/user_model.dart';
+import 'package:bisonte_app/domain/repositories/api_repository.dart';
+import 'package:bisonte_app/domain/requests/firebase_params_request.dart';
+import 'package:bisonte_app/domain/usecases/general_usecase.dart';
+import 'package:bisonte_app/domain/usecases/notifications_usecase.dart';
+import 'package:bisonte_app/presentation/admin/clients/admin_clients_controller.dart';
+import 'package:bisonte_app/presentation/widgets/placeholders_widgets.dart';
 
 class VerifyClientController extends GetxController {
   VerifyClientController({required this.apiRepository});

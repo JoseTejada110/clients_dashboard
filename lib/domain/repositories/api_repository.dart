@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:skeleton_app/data/models/user_model.dart';
-import 'package:skeleton_app/domain/requests/firebase_params_request.dart';
+import 'package:bisonte_app/data/models/user_model.dart';
+import 'package:bisonte_app/domain/requests/firebase_params_request.dart';
 
 abstract class ApiRepositoryInteface {
   Future<List<T>> readData<T>(FirebaseParamsRequest params);

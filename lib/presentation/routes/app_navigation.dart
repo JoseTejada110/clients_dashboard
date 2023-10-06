@@ -1,42 +1,44 @@
 import 'package:get/route_manager.dart';
-import 'package:skeleton_app/presentation/admin/bulk_notification/bulk_notification_binding.dart';
-import 'package:skeleton_app/presentation/admin/bulk_notification/bulk_notification_page.dart';
-import 'package:skeleton_app/presentation/admin/clients/verify/verify_binding.dart';
-import 'package:skeleton_app/presentation/admin/clients/verify/verify_client_page.dart';
-import 'package:skeleton_app/presentation/admin/investments/create/create_investments_binding.dart';
-import 'package:skeleton_app/presentation/admin/investments/create/create_investments_page.dart';
-import 'package:skeleton_app/presentation/admin/transactions/verify/verify_transaction_binding.dart';
-import 'package:skeleton_app/presentation/admin/transactions/verify/verify_transaction_page.dart';
-import 'package:skeleton_app/presentation/banks/banks_binding.dart';
-import 'package:skeleton_app/presentation/banks/banks_page.dart';
-import 'package:skeleton_app/presentation/banks/create/create_bank_binding.dart';
-import 'package:skeleton_app/presentation/banks/create/create_bank_page.dart';
-import 'package:skeleton_app/presentation/customer/investments/invest/invest_binding.dart';
-import 'package:skeleton_app/presentation/customer/investments/invest/invest_page.dart';
-import 'package:skeleton_app/presentation/customer/transfers/create_transfer/create_transfer_binding.dart';
-import 'package:skeleton_app/presentation/customer/transfers/create_transfer/create_transfer_page.dart';
-import 'package:skeleton_app/presentation/customer/transfers/deposit_funds/deposit_funds_binding.dart';
-import 'package:skeleton_app/presentation/customer/transfers/deposit_funds/deposit_funds_page.dart';
-import 'package:skeleton_app/presentation/customer/transfers/transactions/customer_transactions_binding.dart';
-import 'package:skeleton_app/presentation/customer/transfers/transactions/customer_transactions_page.dart';
-import 'package:skeleton_app/presentation/customer/transfers/withdraw/withdraw_binding.dart';
-import 'package:skeleton_app/presentation/customer/transfers/withdraw/withdraw_page.dart';
-import 'package:skeleton_app/presentation/forgot_password/forgot_password_binding.dart';
-import 'package:skeleton_app/presentation/forgot_password/forgot_password_page.dart';
-import 'package:skeleton_app/presentation/home/home_page.dart';
-import 'package:skeleton_app/presentation/login/login_binding.dart';
-import 'package:skeleton_app/presentation/login/login_page.dart';
-import 'package:skeleton_app/presentation/profile/profile_binding.dart';
-import 'package:skeleton_app/presentation/profile/profile_page.dart';
-import 'package:skeleton_app/presentation/referrals/referrals_binding.dart';
-import 'package:skeleton_app/presentation/referrals/referrals_page.dart';
-import 'package:skeleton_app/presentation/signup/signup_binding.dart';
-import 'package:skeleton_app/presentation/signup/signup_page.dart';
-import 'package:skeleton_app/presentation/signup/successful_signup_page.dart';
-import 'package:skeleton_app/presentation/splash/splash_binding.dart';
-import 'package:skeleton_app/presentation/splash/splash_page.dart';
-import 'package:skeleton_app/presentation/support/support_binding.dart';
-import 'package:skeleton_app/presentation/support/support_page.dart';
+import 'package:bisonte_app/presentation/admin/bulk_notification/bulk_notification_binding.dart';
+import 'package:bisonte_app/presentation/admin/bulk_notification/bulk_notification_page.dart';
+import 'package:bisonte_app/presentation/admin/clients/verify/verify_binding.dart';
+import 'package:bisonte_app/presentation/admin/clients/verify/verify_client_page.dart';
+import 'package:bisonte_app/presentation/admin/investments/create/create_investments_binding.dart';
+import 'package:bisonte_app/presentation/admin/investments/create/create_investments_page.dart';
+import 'package:bisonte_app/presentation/admin/transactions/verify/verify_transaction_binding.dart';
+import 'package:bisonte_app/presentation/admin/transactions/verify/verify_transaction_page.dart';
+import 'package:bisonte_app/presentation/banks/banks_binding.dart';
+import 'package:bisonte_app/presentation/banks/banks_page.dart';
+import 'package:bisonte_app/presentation/banks/create/create_bank_binding.dart';
+import 'package:bisonte_app/presentation/banks/create/create_bank_page.dart';
+import 'package:bisonte_app/presentation/customer/investments/invest/invest_binding.dart';
+import 'package:bisonte_app/presentation/customer/investments/invest/invest_page.dart';
+import 'package:bisonte_app/presentation/customer/transfers/create_transfer/create_transfer_binding.dart';
+import 'package:bisonte_app/presentation/customer/transfers/create_transfer/create_transfer_page.dart';
+import 'package:bisonte_app/presentation/customer/transfers/deposit_funds/deposit_funds_binding.dart';
+import 'package:bisonte_app/presentation/customer/transfers/deposit_funds/deposit_funds_page.dart';
+import 'package:bisonte_app/presentation/customer/transfers/transactions/customer_transactions_binding.dart';
+import 'package:bisonte_app/presentation/customer/transfers/transactions/customer_transactions_page.dart';
+import 'package:bisonte_app/presentation/customer/transfers/withdraw/withdraw_binding.dart';
+import 'package:bisonte_app/presentation/customer/transfers/withdraw/withdraw_page.dart';
+import 'package:bisonte_app/presentation/forgot_password/forgot_password_binding.dart';
+import 'package:bisonte_app/presentation/forgot_password/forgot_password_page.dart';
+import 'package:bisonte_app/presentation/home/home_page.dart';
+import 'package:bisonte_app/presentation/login/login_binding.dart';
+import 'package:bisonte_app/presentation/login/login_page.dart';
+import 'package:bisonte_app/presentation/profile/profile_binding.dart';
+import 'package:bisonte_app/presentation/profile/profile_page.dart';
+import 'package:bisonte_app/presentation/referrals/referrals_binding.dart';
+import 'package:bisonte_app/presentation/referrals/referrals_page.dart';
+import 'package:bisonte_app/presentation/signup/signup_binding.dart';
+import 'package:bisonte_app/presentation/signup/signup_page.dart';
+import 'package:bisonte_app/presentation/signup/successful_signup_page.dart';
+import 'package:bisonte_app/presentation/splash/splash_binding.dart';
+import 'package:bisonte_app/presentation/splash/splash_page.dart';
+import 'package:bisonte_app/presentation/support/faq_details/faq_details_binding.dart';
+import 'package:bisonte_app/presentation/support/faq_details/faq_details_page.dart';
+import 'package:bisonte_app/presentation/support/support_binding.dart';
+import 'package:bisonte_app/presentation/support/support_page.dart';
 
 class AppRoutes {
   static const String splash = '/splash';
@@ -63,6 +65,7 @@ class AppRoutes {
   static const String createTransfer = '/createTransfer';
   static const String customerTransactions = '/customerTransactions';
   static const String support = '/support';
+  static const String faqDetails = '/faqDetails';
 }
 
 //
@@ -169,6 +172,11 @@ class AppPages {
       name: AppRoutes.support,
       page: () => const SupportPage(),
       binding: SupportBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.faqDetails,
+      page: () => const FaqDetailsPage(),
+      binding: FaqDetailsBinding(),
     ),
   ];
 }

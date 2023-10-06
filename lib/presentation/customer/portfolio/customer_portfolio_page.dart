@@ -1,19 +1,20 @@
+import 'package:bisonte_app/presentation/widgets/investment_summary_row.dart';
+import 'package:bisonte_app/presentation/widgets/modal_title.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_notifier.dart';
-import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/core/utils/utils.dart';
-import 'package:skeleton_app/data/models/account_model.dart';
-import 'package:skeleton_app/data/models/chart_data_model.dart';
-import 'package:skeleton_app/domain/entities/portfolio_item_entity.dart';
-import 'package:skeleton_app/presentation/customer/portfolio/customer_portfolio_controller.dart';
-import 'package:skeleton_app/presentation/home/home_controller.dart';
-import 'package:skeleton_app/presentation/widgets/custom_card.dart';
-import 'package:skeleton_app/presentation/widgets/input_title.dart';
-import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
-import 'package:skeleton_app/presentation/widgets/support_button.dart';
-import 'package:skeleton_app/presentation/widgets/user_menu_button.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/core/utils/utils.dart';
+import 'package:bisonte_app/data/models/account_model.dart';
+import 'package:bisonte_app/data/models/chart_data_model.dart';
+import 'package:bisonte_app/domain/entities/portfolio_item_entity.dart';
+import 'package:bisonte_app/presentation/customer/portfolio/customer_portfolio_controller.dart';
+import 'package:bisonte_app/presentation/home/home_controller.dart';
+import 'package:bisonte_app/presentation/widgets/custom_card.dart';
+import 'package:bisonte_app/presentation/widgets/input_title.dart';
+import 'package:bisonte_app/presentation/widgets/placeholders_widgets.dart';
+import 'package:bisonte_app/presentation/widgets/support_button.dart';
+import 'package:bisonte_app/presentation/widgets/user_menu_button.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class CustomerPortfolioPage extends StatelessWidget {
@@ -134,9 +135,7 @@ class _InvestmentItem extends StatelessWidget {
           fontSize: 15,
         ),
       ),
-      onTap: () {
-        print('GO TO INVESTMENT DETAILS');
-      },
+      onTap: () => Get.dialog(_InvestmentDetailDialog(investment: investment)),
     );
   }
 }
@@ -232,6 +231,77 @@ class _PieChart extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _InvestmentDetailDialog extends StatelessWidget {
+  const _InvestmentDetailDialog({required this.investment});
+  final AccountInvestment investment;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      backgroundColor: Constants.cardColor,
+      child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ModalTitle(title: investment.name),
+            Padding(
+              padding: Constants.bodyPadding,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InvestmentSummaryRow(
+                    title: 'Fecha de Inicio:',
+                    data:
+                        Constants.dateFormat.format(investment.investmentDate),
+                    dataColor: null,
+                  ),
+                  InvestmentSummaryRow(
+                    title: 'Fecha de Cierre:',
+                    data: Constants.dateFormat.format(investment.endDate),
+                    dataColor: null,
+                  ),
+                  const Divider(),
+                  InvestmentSummaryRow(
+                    title: 'Capital invertido:',
+                    data: NumberFormat.simpleCurrency().format(
+                      investment.investedAmount,
+                    ),
+                  ),
+                  InvestmentSummaryRow(
+                    title: 'ROI:',
+                    data:
+                        '${Constants.decimalFormat.format(investment.returnPercentage)}%',
+                  ),
+                  InvestmentSummaryRow(
+                    title: 'Ganancias Estimadas:',
+                    data: NumberFormat.simpleCurrency().format(
+                      investment.earningsProjected,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed: Get.back,
+                      child: const Text('Cerrar'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

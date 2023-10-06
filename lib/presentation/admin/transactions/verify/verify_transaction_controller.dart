@@ -4,16 +4,15 @@ import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_notifier.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/route_manager.dart';
-import 'package:skeleton_app/core/error_handling/failures.dart';
-import 'package:skeleton_app/core/utils/messages_utils.dart';
-import 'package:skeleton_app/core/utils/utils.dart';
-import 'package:skeleton_app/data/models/account_model.dart';
-import 'package:skeleton_app/data/models/app_transaction_model.dart';
-import 'package:skeleton_app/data/models/user_model.dart';
-import 'package:skeleton_app/domain/repositories/api_repository.dart';
-import 'package:skeleton_app/domain/usecases/general_usecase.dart';
-import 'package:skeleton_app/presentation/admin/transactions/admin_transactions_controller.dart';
-import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
+import 'package:bisonte_app/core/error_handling/failures.dart';
+import 'package:bisonte_app/core/utils/messages_utils.dart';
+import 'package:bisonte_app/core/utils/utils.dart';
+import 'package:bisonte_app/data/models/app_transaction_model.dart';
+import 'package:bisonte_app/data/models/user_model.dart';
+import 'package:bisonte_app/domain/repositories/api_repository.dart';
+import 'package:bisonte_app/domain/usecases/general_usecase.dart';
+import 'package:bisonte_app/presentation/admin/transactions/admin_transactions_controller.dart';
+import 'package:bisonte_app/presentation/widgets/placeholders_widgets.dart';
 
 class VerifyTransactionController extends GetxController with StateMixin {
   VerifyTransactionController({required this.apiRepository});
@@ -103,12 +102,11 @@ class VerifyTransactionController extends GetxController with StateMixin {
 
     // Ejecutando transacción
     return db.runTransaction<bool>((firebaseTransaction) async {
-      final adminValue = await firebaseTransaction.get(adminAccountRef);
-      final adminAccount = Account.fromJson(
-        adminValue.data()!..addAll({'id': adminValue.id}),
-      );
-      // TODO: quitar esta línea
-      if (adminAccount.netBalance < transaction.amount) return false;
+      // final adminValue = await firebaseTransaction.get(adminAccountRef);
+      // final adminAccount = Account.fromJson(
+      //   adminValue.data()!..addAll({'id': adminValue.id}),
+      // );
+      // if (adminAccount.netBalance < transaction.amount) return false;
 
       // Actualizando el balance de la cuenta del administrador
       switch (transaction.transactionType) {

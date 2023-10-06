@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:skeleton_app/core/constants.dart';
+import 'package:bisonte_app/core/constants.dart';
 
 class InputTitle extends StatelessWidget {
   const InputTitle(
@@ -25,7 +25,10 @@ class InputTitle extends StatelessWidget {
           ),
           children: isRequired
               ? [
-                  TextSpan(text: ' *', style: TextStyle(color: Constants.red)),
+                  const TextSpan(
+                    text: ' *',
+                    style: TextStyle(color: Constants.red),
+                  ),
                 ]
               : [],
         ),

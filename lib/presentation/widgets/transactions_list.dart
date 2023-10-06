@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:intl/intl.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/core/utils/utils.dart';
-import 'package:skeleton_app/data/models/app_transaction_model.dart';
-import 'package:skeleton_app/data/models/user_model.dart';
-import 'package:skeleton_app/presentation/routes/app_navigation.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/core/utils/utils.dart';
+import 'package:bisonte_app/data/models/app_transaction_model.dart';
+import 'package:bisonte_app/data/models/user_model.dart';
+import 'package:bisonte_app/presentation/routes/app_navigation.dart';
 
 class TransactionsList extends StatelessWidget {
   const TransactionsList({

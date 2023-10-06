@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:skeleton_app/presentation/support/support_controller.dart';
+import 'package:bisonte_app/presentation/support/support_controller.dart';
 
 class SupportBinding extends Bindings {
   @override

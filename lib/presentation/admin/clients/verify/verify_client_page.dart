@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/presentation/admin/clients/verify/verify_client_controller.dart';
-import 'package:skeleton_app/presentation/widgets/custom_card.dart';
-import 'package:skeleton_app/presentation/widgets/image_full_screen_wrapper.dart';
-import 'package:skeleton_app/presentation/widgets/image_picker_container.dart';
-import 'package:skeleton_app/presentation/widgets/input_title.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/presentation/admin/clients/verify/verify_client_controller.dart';
+import 'package:bisonte_app/presentation/widgets/custom_card.dart';
+import 'package:bisonte_app/presentation/widgets/image_full_screen_wrapper.dart';
+import 'package:bisonte_app/presentation/widgets/image_picker_container.dart';
+import 'package:bisonte_app/presentation/widgets/input_title.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 class VerifyClientPage extends GetView<VerifyClientController> {
   const VerifyClientPage({super.key});
@@ -44,7 +45,25 @@ class VerifyClientPage extends GetView<VerifyClientController> {
             const _SectionTitle('Información de Contacto'),
             const SizedBox(height: 10),
             const InputTitle('Número telefónico'),
-            _InformativeContainer(data: controller.client.phoneNumber),
+            IntlPhoneField(
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
+              initialValue: controller.client.phoneNumber,
+              decoration: InputDecoration(
+                isDense: true,
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                fillColor: Constants.secondaryColor.withOpacity(.8),
+                filled: true,
+              ),
+              initialCountryCode: controller.client.countryCode,
+              languageCode: 'es',
+              enabled: false,
+            ),
             const SizedBox(height: 10),
             const InputTitle('Dirección'),
             _InformativeContainer(data: controller.client.address),
@@ -122,6 +141,8 @@ class _InformativeContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return InputDecorator(
       decoration: InputDecoration(
+        enabled: false,
+        isDense: true,
         fillColor: Constants.secondaryColor.withOpacity(.8),
         filled: true,
         border: const OutlineInputBorder(

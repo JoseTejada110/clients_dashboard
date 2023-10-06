@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:skeleton_app/domain/entities/menu_item_class.dart';
+import 'package:bisonte_app/domain/entities/menu_item_class.dart';
 
 class UploadFileButton extends StatelessWidget {
   const UploadFileButton({

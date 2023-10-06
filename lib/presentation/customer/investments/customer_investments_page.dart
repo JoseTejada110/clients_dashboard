@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/core/utils/utils.dart';
-import 'package:skeleton_app/presentation/customer/investments/customer_investments_controller.dart';
-import 'package:skeleton_app/presentation/widgets/custom_card.dart';
-import 'package:skeleton_app/presentation/widgets/custom_input.dart';
-import 'package:skeleton_app/presentation/widgets/investments_list.dart';
-import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
-import 'package:skeleton_app/presentation/widgets/support_button.dart';
-import 'package:skeleton_app/presentation/widgets/user_menu_button.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/core/utils/utils.dart';
+import 'package:bisonte_app/presentation/customer/investments/customer_investments_controller.dart';
+import 'package:bisonte_app/presentation/widgets/custom_card.dart';
+import 'package:bisonte_app/presentation/widgets/custom_input.dart';
+import 'package:bisonte_app/presentation/widgets/investments_list.dart';
+import 'package:bisonte_app/presentation/widgets/placeholders_widgets.dart';
+import 'package:bisonte_app/presentation/widgets/support_button.dart';
+import 'package:bisonte_app/presentation/widgets/user_menu_button.dart';
 
 class CustomerInvestmentsPage extends StatelessWidget {
   const CustomerInvestmentsPage({super.key});

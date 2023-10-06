@@ -4,7 +4,7 @@ import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/route_manager.dart';
-import 'package:skeleton_app/core/constants.dart';
+import 'package:bisonte_app/core/constants.dart';
 
 class CustomDatePicker extends StatelessWidget {
   const CustomDatePicker({

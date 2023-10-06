@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+import 'package:bisonte_app/core/constants.dart';
 
 class ImageFullScreenWrapperWidget extends StatelessWidget {
   const ImageFullScreenWrapperWidget({super.key, required this.child});
@@ -8,15 +10,7 @@ class ImageFullScreenWrapperWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          PageRouteBuilder(
-            opaque: false,
-            pageBuilder: (BuildContext context, _, __) {
-              return _FullScreenPage(child: child);
-            },
-          ),
-        );
+        Get.to(() => _FullScreenPage(child: child));
       },
       child: child,
     );
@@ -40,8 +34,8 @@ class _FullScreenPage extends StatelessWidget {
               AnimatedPositioned(
                 duration: const Duration(milliseconds: 333),
                 curve: Curves.fastOutSlowIn,
-                top: 0,
-                bottom: 0,
+                top: 80,
+                bottom: 80,
                 left: 0,
                 right: 0,
                 child: InteractiveViewer(
@@ -69,8 +63,8 @@ class _FullScreenPage extends StatelessWidget {
                 onPressed: () => Navigator.of(context).pop(),
                 child: const Icon(
                   Icons.arrow_back,
-                  // color: widget.dark ? Colors.white : Colors.black,
-                  size: 25,
+                  color: Constants.darkIndicatorColor,
+                  size: 30,
                 ),
               ),
             ),

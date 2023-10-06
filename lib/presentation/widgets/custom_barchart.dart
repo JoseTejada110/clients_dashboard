@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/data/models/chart_data_model.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/data/models/chart_data_model.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class CustomBarchart extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:skeleton_app/core/error_handling/exceptions.dart';
-import 'package:skeleton_app/core/error_handling/failures.dart';
+import 'package:bisonte_app/core/error_handling/exceptions.dart';
+import 'package:bisonte_app/core/error_handling/failures.dart';
 
 /// Método para reutilizar el mismo bloque try-catch en todas las peticiones
 Future<Either<FailureEntity, T>> catchRequestExceptions<T>(

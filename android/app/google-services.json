@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:285444618426:android:cde62238725af4c143aa83",
+        "mobilesdk_app_id": "1:285444618426:android:f0da535bf067b7bf43aa83",
         "android_client_info": {
-          "package_name": "com.example.skeleton_app"
+          "package_name": "com.nuacventurecapital.bisonteapp"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "285444618426-7hj2fj61m66459f0v3ve1jq9r2nabjhd.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.skeletonApp"
+                "bundle_id": "com.nuacventurecapital.bisonteapp"
               }
             }
           ]
@@ -45,7 +45,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:285444618426:android:33663f7b47c7795c43aa83",
         "android_client_info": {
-          "package_name": "com.nuacventurecapital.nuactransfer"
+          "package_name": "com.nuacventurecapital.bisonteapp"
         }
       },
       "oauth_client": [
@@ -70,7 +70,7 @@
               "client_id": "285444618426-7hj2fj61m66459f0v3ve1jq9r2nabjhd.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.skeletonApp"
+                "bundle_id": "com.nuacventurecapital.bisonteapp"
               }
             }
           ]

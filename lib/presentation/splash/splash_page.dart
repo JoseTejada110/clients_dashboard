@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:get/instance_manager.dart';
-import 'package:skeleton_app/presentation/splash/splash_controller.dart';
+import 'package:bisonte_app/presentation/splash/splash_controller.dart';
 
 class SplashPage extends GetView<SplashController> {
   const SplashPage({Key? key}) : super(key: key);

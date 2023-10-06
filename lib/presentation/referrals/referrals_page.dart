@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/core/utils/utils.dart';
-import 'package:skeleton_app/presentation/referrals/referrals_controller.dart';
-import 'package:skeleton_app/presentation/widgets/custom_card.dart';
-import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/core/utils/utils.dart';
+import 'package:bisonte_app/presentation/referrals/referrals_controller.dart';
+import 'package:bisonte_app/presentation/widgets/custom_card.dart';
+import 'package:bisonte_app/presentation/widgets/placeholders_widgets.dart';
 
 class ReferralsPage extends GetView<ReferralsController> {
   const ReferralsPage({super.key});

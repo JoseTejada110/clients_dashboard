@@ -58,7 +58,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyC_Iuicgm1yfb4gLLDGOcLsAbLnqRObvDo',
-    appId: '1:285444618426:android:33663f7b47c7795c43aa83',
+    appId: '1:285444618426:android:f0da535bf067b7bf43aa83',
     messagingSenderId: '285444618426',
     projectId: 'investments-dashboard-clients',
     storageBucket: 'investments-dashboard-clients.appspot.com',
@@ -66,11 +66,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBnl1q3E1aOJGI1izTXAta7XpLB0Qv-5qs',
-    appId: '1:285444618426:ios:5da3aa8b3169244c43aa83',
+    appId: '1:285444618426:ios:db84c85957452e9843aa83',
     messagingSenderId: '285444618426',
     projectId: 'investments-dashboard-clients',
     storageBucket: 'investments-dashboard-clients.appspot.com',
-    iosClientId: '285444618426-l2jkdfps0h81buicap0kvsl1f8hcm7nb.apps.googleusercontent.com',
-    iosBundleId: 'com.nuacventurecapital.nuactransfer',
+    iosBundleId: 'com.nuacventurecapital.bisonteapp',
   );
 }

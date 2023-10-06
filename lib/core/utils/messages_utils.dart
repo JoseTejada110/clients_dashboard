@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/core/error_handling/failures.dart';
-import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/core/error_handling/failures.dart';
+import 'package:bisonte_app/presentation/widgets/placeholders_widgets.dart';
 
 class MessagesUtils {
   static void showLoading({String message = "Cargando..."}) {

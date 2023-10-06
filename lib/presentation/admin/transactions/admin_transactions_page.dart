@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_notifier.dart';
 import 'package:get/instance_manager.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/core/utils/utils.dart';
-import 'package:skeleton_app/presentation/admin/transactions/admin_transactions_controller.dart';
-import 'package:skeleton_app/presentation/widgets/custom_card.dart';
-import 'package:skeleton_app/presentation/widgets/custom_input.dart';
-import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
-import 'package:skeleton_app/presentation/widgets/support_button.dart';
-import 'package:skeleton_app/presentation/widgets/transactions_list.dart';
-import 'package:skeleton_app/presentation/widgets/user_menu_button.dart';
+import 'package:bisonte_app/core/utils/utils.dart';
+import 'package:bisonte_app/presentation/admin/transactions/admin_transactions_controller.dart';
+import 'package:bisonte_app/presentation/widgets/custom_card.dart';
+import 'package:bisonte_app/presentation/widgets/placeholders_widgets.dart';
+import 'package:bisonte_app/presentation/widgets/support_button.dart';
+import 'package:bisonte_app/presentation/widgets/transactions_list.dart';
+import 'package:bisonte_app/presentation/widgets/user_menu_button.dart';
 
 class AdminTransactionsPage extends StatelessWidget {
   const AdminTransactionsPage({super.key});

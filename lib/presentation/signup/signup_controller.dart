@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/route_manager.dart';
-import 'package:skeleton_app/core/utils/messages_utils.dart';
-import 'package:skeleton_app/domain/repositories/api_repository.dart';
-import 'package:skeleton_app/domain/usecases/notifications_usecase.dart';
-import 'package:skeleton_app/domain/usecases/signup_usecase.dart';
-import 'package:skeleton_app/presentation/routes/app_navigation.dart';
+import 'package:bisonte_app/core/utils/messages_utils.dart';
+import 'package:bisonte_app/domain/repositories/api_repository.dart';
+import 'package:bisonte_app/domain/usecases/notifications_usecase.dart';
+import 'package:bisonte_app/domain/usecases/signup_usecase.dart';
+import 'package:bisonte_app/presentation/routes/app_navigation.dart';
+import 'package:intl_phone_field/countries.dart';
 
 class SignUpController extends GetxController {
   SignUpController({required this.apiRepository});
@@ -41,6 +42,8 @@ class SignUpController extends GetxController {
 
   // Información de contacto y credenciales
   final phoneController = TextEditingController();
+  Country selectedCountry =
+      countries.firstWhere((element) => element.code == 'DO');
   final addressController = TextEditingController();
   final emailController = TextEditingController();
   final passController = TextEditingController();
@@ -54,6 +57,7 @@ class SignUpController extends GetxController {
   void pickIdentificationType(dynamic value) =>
       selectedIdentificationType.value = value;
   void pickBirthdayDate(DateTime date) => birthdayDate.value = date;
+  void pickCountry(Country value) => selectedCountry = value;
 
   void pickIdentityDocumentImage(File image) =>
       identityDocumentImage.value = image;
@@ -214,6 +218,8 @@ class SignUpController extends GetxController {
       'birthday_date': Timestamp.fromDate(birthdayDate.value!),
       'created_at': FieldValue.serverTimestamp(),
       'phone_number': phoneController.text,
+      'dial_code': selectedCountry.dialCode,
+      'country_code': selectedCountry.code,
       'address': addressController.text,
       'email': emailController.text,
       'status': 'No Verificado',

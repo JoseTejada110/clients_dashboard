@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:skeleton_app/core/error_handling/exceptions.dart';
-import 'package:skeleton_app/data/models/account_model.dart';
-import 'package:skeleton_app/data/models/user_model.dart';
-import 'package:skeleton_app/domain/repositories/api_repository.dart';
-import 'package:skeleton_app/domain/requests/firebase_params_request.dart';
+import 'package:bisonte_app/core/error_handling/exceptions.dart';
+import 'package:bisonte_app/data/models/account_model.dart';
+import 'package:bisonte_app/data/models/user_model.dart';
+import 'package:bisonte_app/domain/repositories/api_repository.dart';
+import 'package:bisonte_app/domain/requests/firebase_params_request.dart';
 
 class ApiRepositoryImpl extends ApiRepositoryInteface {
   static const timeoutLimit = Duration(seconds: 30);
@@ -19,21 +19,8 @@ class ApiRepositoryImpl extends ApiRepositoryInteface {
 
       // Agregando los parámetros where
       if (params.whereParams != null) {
-        for (FirebaseWhereParams whereParams in params.whereParams!) {
-          query = query.where(
-            whereParams.field,
-            isEqualTo: whereParams.isEqualTo,
-            isNotEqualTo: whereParams.isNotEqualTo,
-            isLessThan: whereParams.isLessThan,
-            isLessThanOrEqualTo: whereParams.isLessThanOrEqualTo,
-            isGreaterThan: whereParams.isGreaterThan,
-            isGreaterThanOrEqualTo: whereParams.isGreaterThanOrEqualTo,
-            arrayContains: whereParams.arrayContains,
-            arrayContainsAny: whereParams.arrayContainsAny,
-            whereIn: whereParams.whereIn,
-            whereNotIn: whereParams.whereNotIn,
-            isNull: whereParams.isNull,
-          );
+        for (Filter whereParams in params.whereParams!) {
+          query = query.where(whereParams);
         }
       }
       if (params.orderBy != null) {
@@ -42,7 +29,6 @@ class ApiRepositoryImpl extends ApiRepositoryInteface {
           descending: params.orderBy!.descending,
         );
       }
-
       final querySnapshot = await query.get().timeout(timeoutLimit);
 
       final List<T> result = [];
@@ -55,16 +41,17 @@ class ApiRepositoryImpl extends ApiRepositoryInteface {
               : params.parser!(element.data()..addAll({'id': element.id})));
         }
       } catch (e) {
-        print('dataParsingFailure: $e');
+        // print('dataParsingFailure: $e');
         throw DataParsingException();
       }
-      print('RESULT: $result');
+      // print('RESULT: $result');
       return result;
     } on FirebaseException catch (e) {
-      print('FIREBASE EXCEPTION: $e');
-      print(e.code);
+      // print('FIREBASE EXCEPTION: $e');
+      // print(e.code);
       throw _handleFirebaseException(e.code);
     } catch (e) {
+      // print(e);
       if (e is TimeoutException) {
         throw CustomTimeoutException();
       }
@@ -76,7 +63,7 @@ class ApiRepositoryImpl extends ApiRepositoryInteface {
         }
         throw NoConnectionException();
       }
-      print('UNHANDLED EXCEPTION: $e');
+      // print('UNHANDLED EXCEPTION: $e');
       rethrow;
     }
   }
@@ -97,11 +84,11 @@ class ApiRepositoryImpl extends ApiRepositoryInteface {
         return storedDocument.id;
       }
     } on FirebaseException catch (e) {
-      print('FIREBASE EXCEPTION: $e');
-      print(e.code);
+      // print('FIREBASE EXCEPTION: $e');
+      // print(e.code);
       throw _handleFirebaseException(e.code);
     } catch (e) {
-      print('UNHANDLED EXCEPTION: $e');
+      // print('UNHANDLED EXCEPTION: $e');
       if (e is TimeoutException) {
         throw CustomTimeoutException();
       }
@@ -123,11 +110,11 @@ class ApiRepositoryImpl extends ApiRepositoryInteface {
     try {
       return await queries();
     } on FirebaseException catch (e) {
-      print('FIREBASE EXCEPTION: $e');
-      print(e.code);
+      // print('FIREBASE EXCEPTION: $e');
+      // print(e.code);
       throw _handleFirebaseException(e.code);
     } catch (e) {
-      print('UNHANDLED EXCEPTION: $e');
+      // print('UNHANDLED EXCEPTION: $e');
       if (e is TimeoutException) {
         throw CustomTimeoutException();
       }
@@ -213,14 +200,14 @@ class ApiRepositoryImpl extends ApiRepositoryInteface {
       return uid!;
     } catch (e) {
       if (e is FirebaseAuthException) {
-        print('FIREBASE AUTH EXCEPTION: $e');
+        // print('FIREBASE AUTH EXCEPTION: $e');
         throw _handleFirebaseAuthException(e.code);
       }
       if (e is FirebaseException) {
-        print('FIREBASE EXCEPTION: $e');
+        // print('FIREBASE EXCEPTION: $e');
         throw _handleFirebaseException(e.code);
       }
-      print('UNHANDLED EXCEPTION: $e');
+      // print('UNHANDLED EXCEPTION: $e');
       if (e is TimeoutException) {
         throw CustomTimeoutException();
       }
@@ -283,14 +270,14 @@ class ApiRepositoryImpl extends ApiRepositoryInteface {
       return UserModel.fromJson(userData, isAccountsLoaded: true);
     } catch (e) {
       if (e is FirebaseAuthException) {
-        print('FIREBASE AUTH EXCEPTION: $e');
+        // print('FIREBASE AUTH EXCEPTION: $e');
         throw _handleFirebaseAuthException(e.code);
       }
       if (e is FirebaseException) {
-        print('FIREBASE EXCEPTION: $e');
+        // print('FIREBASE EXCEPTION: $e');
         throw _handleFirebaseException(e.code);
       }
-      print('UNHANDLED EXCEPTION: $e');
+      // print('UNHANDLED EXCEPTION: $e');
       if (e is TimeoutException) {
         throw CustomTimeoutException();
       }
@@ -308,7 +295,7 @@ class ApiRepositoryImpl extends ApiRepositoryInteface {
 
   // Manage firebase auth exceptions
   Exception _handleFirebaseAuthException(String errorCode) {
-    print(errorCode);
+    // print(errorCode);
     switch (errorCode) {
       case 'email-already-in-use':
         return UnauthorizedException(
@@ -338,7 +325,7 @@ class ApiRepositoryImpl extends ApiRepositoryInteface {
 
   // Manage firebase exceptions
   Exception _handleFirebaseException(String errorCode) {
-    print(errorCode);
+    // print(errorCode);
     switch (errorCode) {
       case 'permission-denied':
         return UnauthorizedException();

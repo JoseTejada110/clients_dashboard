@@ -1,5 +1,5 @@
 import 'package:get/instance_manager.dart';
-import 'package:skeleton_app/presentation/customer/transfers/withdraw/withdraw_controller.dart';
+import 'package:bisonte_app/presentation/customer/transfers/withdraw/withdraw_controller.dart';
 
 class WithdrawBinding extends Bindings {
   @override

@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/data/models/account_model.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/data/models/account_model.dart';
 
 List<UserModel> userFromJson(dynamic json) =>
     List<UserModel>.from(json.map((x) => UserModel.fromJson(x)));
@@ -26,6 +26,8 @@ class UserModel {
     required this.isAdmin,
     required this.name,
     required this.phoneNumber,
+    required this.dialCode,
+    required this.countryCode,
     required this.addressProofImage,
     required this.createdAt,
     required this.accounts,
@@ -46,6 +48,8 @@ class UserModel {
   bool isAdmin;
   String name;
   String phoneNumber;
+  String dialCode; // Prefijo del número telefónico del país. Ej: +1 809...
+  String countryCode; // Código del país del usuario. Ej. DO, US...
   String addressProofImage;
   DateTime createdAt;
   List<Account> accounts;
@@ -68,6 +72,8 @@ class UserModel {
         isAdmin: json["is_admin"],
         name: json["name"] ?? '',
         phoneNumber: json["phone_number"] ?? '',
+        dialCode: json["dial_code"] ?? '1',
+        countryCode: json["country_code"] ?? 'DO',
         addressProofImage: json["address_proof_image"] ?? '',
         createdAt: (json['created_at'] as Timestamp).toDate(),
         accounts:

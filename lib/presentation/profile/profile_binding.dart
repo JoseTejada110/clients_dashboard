@@ -1,5 +1,5 @@
 import 'package:get/instance_manager.dart';
-import 'package:skeleton_app/presentation/profile/profile_controller.dart';
+import 'package:bisonte_app/presentation/profile/profile_controller.dart';
 
 class ProfileBinding extends Bindings {
   @override

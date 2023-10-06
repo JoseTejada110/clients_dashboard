@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/core/utils/utils.dart';
-import 'package:skeleton_app/data/models/user_model.dart';
-import 'package:skeleton_app/presentation/admin/clients/admin_clients_controller.dart';
-import 'package:skeleton_app/presentation/routes/app_navigation.dart';
-import 'package:skeleton_app/presentation/widgets/custom_card.dart';
-import 'package:skeleton_app/presentation/widgets/custom_input.dart';
-import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
-import 'package:skeleton_app/presentation/widgets/support_button.dart';
-import 'package:skeleton_app/presentation/widgets/user_menu_button.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/core/utils/utils.dart';
+import 'package:bisonte_app/data/models/user_model.dart';
+import 'package:bisonte_app/presentation/admin/clients/admin_clients_controller.dart';
+import 'package:bisonte_app/presentation/routes/app_navigation.dart';
+import 'package:bisonte_app/presentation/widgets/custom_buttons.dart';
+import 'package:bisonte_app/presentation/widgets/custom_card.dart';
+import 'package:bisonte_app/presentation/widgets/custom_input.dart';
+import 'package:bisonte_app/presentation/widgets/placeholders_widgets.dart';
+import 'package:bisonte_app/presentation/widgets/support_button.dart';
+import 'package:bisonte_app/presentation/widgets/user_menu_button.dart';
 
 class AdminClientsPage extends StatelessWidget {
   const AdminClientsPage({super.key});
@@ -19,7 +20,6 @@ class AdminClientsPage extends StatelessWidget {
     final controller = Get.put(
       AdminClientsController(apiRepository: Get.find()),
     );
-    final primaryColor = Theme.of(context).primaryColor;
     return GestureDetector(
       onTap: () => Utils.unfocus(context),
       child: Scaffold(
@@ -36,10 +36,26 @@ class AdminClientsPage extends StatelessWidget {
             children: [
               Padding(
                 padding: Constants.bodyPadding,
-                child: CustomInput(
-                  controller: controller.searchController,
-                  prefixIcon: const Icon(Icons.search),
-                  hintText: 'Buscar Clientes',
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: CustomInput(
+                        controller: controller.searchController,
+                        prefixIcon: const Icon(Icons.search),
+                        hintText: 'Buscar por Identificación',
+                        suffixIcon: CustomIconButton(
+                          icon: Icons.clear,
+                          onPressed: () => controller.searchController.clear(),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    CustomTextButton(
+                      alignment: Alignment.center,
+                      title: 'Buscar',
+                      onPressed: controller.loadClients,
+                    ),
+                  ],
                 ),
               ),
               Expanded(

@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/instance_manager.dart';
-import 'package:skeleton_app/core/utils/messages_utils.dart';
-import 'package:skeleton_app/presentation/home/home_controller.dart';
+import 'package:bisonte_app/core/utils/messages_utils.dart';
+import 'package:bisonte_app/presentation/home/home_controller.dart';
 
 import '../../data/models/user_model.dart';
 
@@ -28,6 +28,31 @@ class Utils {
   ) async {
     await Clipboard.setData(ClipboardData(text: text));
     MessagesUtils.successSnackbar(successTitle, successMessage);
+  }
+
+  static Future<void> callPhoneNumber(String data) async {
+    try {
+      final number = data
+          .replaceAll('-', '')
+          .replaceAll('(', '')
+          .replaceAll(')', '')
+          .trim();
+      if (number.isEmpty) {
+        MessagesUtils.errorSnackbar(
+          'Número Inválido',
+          'No hemos podido encontrar un número telefónico asociado a esta entidad.',
+        );
+        return;
+      }
+      final uri = Uri.parse('tel:+1-$number');
+      // if (await canLaunchUrl(uri)) {
+      //   await launchUrl(uri);
+      // } else {
+      //   // _failedSnackbar(context, 'Número telefónico inválido');
+      // }
+    } catch (e) {
+      // _failedSnackbar(context, 'No se pudo realizar la llamada');
+    }
   }
 
   static bool isNumeric(String? string) {

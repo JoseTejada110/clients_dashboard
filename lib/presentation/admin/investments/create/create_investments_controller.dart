@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/core/utils/messages_utils.dart';
-import 'package:skeleton_app/core/utils/utils.dart';
-import 'package:skeleton_app/data/models/investment_model.dart';
-import 'package:skeleton_app/domain/repositories/api_repository.dart';
-import 'package:skeleton_app/domain/requests/firebase_params_request.dart';
-import 'package:skeleton_app/domain/usecases/general_usecase.dart';
-import 'package:skeleton_app/domain/usecases/notifications_usecase.dart';
-import 'package:skeleton_app/presentation/admin/investments/admin_investments_controller.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/core/utils/messages_utils.dart';
+import 'package:bisonte_app/core/utils/utils.dart';
+import 'package:bisonte_app/data/models/investment_model.dart';
+import 'package:bisonte_app/domain/repositories/api_repository.dart';
+import 'package:bisonte_app/domain/requests/firebase_params_request.dart';
+import 'package:bisonte_app/domain/usecases/general_usecase.dart';
+import 'package:bisonte_app/domain/usecases/notifications_usecase.dart';
+import 'package:bisonte_app/presentation/admin/investments/admin_investments_controller.dart';
 
 class CreateInvestmentsController extends GetxController {
   CreateInvestmentsController({required this.apiRepository});

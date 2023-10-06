@@ -1,4 +1,4 @@
-import 'package:skeleton_app/data/models/user_model.dart';
+import 'package:bisonte_app/data/models/user_model.dart';
 
 abstract class LocalStorageRepositoryInterface {
   Future<bool?> isDarkTheme();

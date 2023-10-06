@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:skeleton_app/core/utils/utils.dart';
-import 'package:skeleton_app/presentation/forgot_password/forgot_password_controller.dart';
-import 'package:skeleton_app/presentation/widgets/custom_card.dart';
-import 'package:skeleton_app/presentation/widgets/custom_input.dart';
-import 'package:skeleton_app/presentation/widgets/input_title.dart';
+import 'package:bisonte_app/core/utils/utils.dart';
+import 'package:bisonte_app/presentation/forgot_password/forgot_password_controller.dart';
+import 'package:bisonte_app/presentation/widgets/custom_card.dart';
+import 'package:bisonte_app/presentation/widgets/custom_input.dart';
+import 'package:bisonte_app/presentation/widgets/input_title.dart';
 
 class ForgotPasswordPage extends GetView<ForgotPasswordController> {
   const ForgotPasswordPage({super.key});

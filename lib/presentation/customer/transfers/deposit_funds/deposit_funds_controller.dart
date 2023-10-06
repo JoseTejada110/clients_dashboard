@@ -8,14 +8,14 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_notifier.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/instance_manager.dart';
-import 'package:skeleton_app/core/error_handling/failures.dart';
-import 'package:skeleton_app/core/utils/messages_utils.dart';
-import 'package:skeleton_app/core/utils/utils.dart';
-import 'package:skeleton_app/data/models/bank_model.dart';
-import 'package:skeleton_app/domain/repositories/api_repository.dart';
-import 'package:skeleton_app/domain/requests/firebase_params_request.dart';
-import 'package:skeleton_app/domain/usecases/general_usecase.dart';
-import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
+import 'package:bisonte_app/core/error_handling/failures.dart';
+import 'package:bisonte_app/core/utils/messages_utils.dart';
+import 'package:bisonte_app/core/utils/utils.dart';
+import 'package:bisonte_app/data/models/bank_model.dart';
+import 'package:bisonte_app/domain/repositories/api_repository.dart';
+import 'package:bisonte_app/domain/requests/firebase_params_request.dart';
+import 'package:bisonte_app/domain/usecases/general_usecase.dart';
+import 'package:bisonte_app/presentation/widgets/placeholders_widgets.dart';
 
 class DepositFundsController extends GetxController with StateMixin {
   DepositFundsController({required this.apiRepository});

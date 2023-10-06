@@ -1,4 +1,4 @@
-import 'package:skeleton_app/data/models/account_model.dart';
+import 'package:bisonte_app/data/models/account_model.dart';
 
 class PortfolioItem {
   PortfolioItem({

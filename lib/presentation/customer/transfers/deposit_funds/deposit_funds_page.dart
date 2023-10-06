@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/core/utils/utils.dart';
-import 'package:skeleton_app/data/models/bank_model.dart';
-import 'package:skeleton_app/presentation/customer/transfers/deposit_funds/deposit_funds_controller.dart';
-import 'package:skeleton_app/presentation/routes/app_navigation.dart';
-import 'package:skeleton_app/presentation/widgets/custom_buttons.dart';
-import 'package:skeleton_app/presentation/widgets/custom_card.dart';
-import 'package:skeleton_app/presentation/widgets/custom_dropdown.dart';
-import 'package:skeleton_app/presentation/widgets/custom_input.dart';
-import 'package:skeleton_app/presentation/widgets/image_picker_container.dart';
-import 'package:skeleton_app/presentation/widgets/input_title.dart';
-import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/core/utils/utils.dart';
+import 'package:bisonte_app/data/models/bank_model.dart';
+import 'package:bisonte_app/presentation/customer/transfers/deposit_funds/deposit_funds_controller.dart';
+import 'package:bisonte_app/presentation/routes/app_navigation.dart';
+import 'package:bisonte_app/presentation/widgets/custom_buttons.dart';
+import 'package:bisonte_app/presentation/widgets/custom_card.dart';
+import 'package:bisonte_app/presentation/widgets/custom_dropdown.dart';
+import 'package:bisonte_app/presentation/widgets/custom_input.dart';
+import 'package:bisonte_app/presentation/widgets/image_picker_container.dart';
+import 'package:bisonte_app/presentation/widgets/input_title.dart';
+import 'package:bisonte_app/presentation/widgets/placeholders_widgets.dart';
 
 class DepositFundsPage extends GetView<DepositFundsController> {
   const DepositFundsPage({super.key});

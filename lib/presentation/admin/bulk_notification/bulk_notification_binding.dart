@@ -1,5 +1,5 @@
 import 'package:get/instance_manager.dart';
-import 'package:skeleton_app/presentation/admin/bulk_notification/bulk_notification_controller.dart';
+import 'package:bisonte_app/presentation/admin/bulk_notification/bulk_notification_controller.dart';
 
 class BulkNotificationBinding extends Bindings {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:skeleton_app/presentation/customer/transfers/create_transfer/create_transfer_controller.dart';
+import 'package:bisonte_app/presentation/customer/transfers/create_transfer/create_transfer_controller.dart';
 
 class CreateTransferPage extends GetView<CreateTransferController> {
   const CreateTransferPage({super.key});

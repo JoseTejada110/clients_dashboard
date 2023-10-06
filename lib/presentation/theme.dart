@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skeleton_app/core/constants.dart';
+import 'package:bisonte_app/core/constants.dart';
 
 ThemeData appTheme = ThemeData(
   brightness: Brightness.dark,

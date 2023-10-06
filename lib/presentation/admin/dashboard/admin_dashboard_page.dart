@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/instance_manager.dart';
 import 'package:intl/intl.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/data/models/chart_data_model.dart';
-import 'package:skeleton_app/presentation/admin/dashboard/admin_dashboard_controller.dart';
-import 'package:skeleton_app/presentation/routes/app_navigation.dart';
-import 'package:skeleton_app/presentation/widgets/custom_barchart.dart';
-import 'package:skeleton_app/presentation/widgets/custom_card.dart';
-import 'package:skeleton_app/presentation/widgets/dashboard_card.dart';
-import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
-import 'package:skeleton_app/presentation/widgets/support_button.dart';
-import 'package:skeleton_app/presentation/widgets/user_menu_button.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/data/models/chart_data_model.dart';
+import 'package:bisonte_app/presentation/admin/dashboard/admin_dashboard_controller.dart';
+import 'package:bisonte_app/presentation/routes/app_navigation.dart';
+import 'package:bisonte_app/presentation/widgets/custom_barchart.dart';
+import 'package:bisonte_app/presentation/widgets/custom_card.dart';
+import 'package:bisonte_app/presentation/widgets/dashboard_card.dart';
+import 'package:bisonte_app/presentation/widgets/placeholders_widgets.dart';
+import 'package:bisonte_app/presentation/widgets/support_button.dart';
+import 'package:bisonte_app/presentation/widgets/user_menu_button.dart';
 
 class AdminDashboardPage extends StatelessWidget {
   const AdminDashboardPage({super.key});

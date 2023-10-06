@@ -1,7 +1,7 @@
-name: skeleton_app
+name: bisonte_app
 description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.0.0+3
+version: 1.0.1+2
 
 environment:
   sdk: '>=3.0.1 <4.0.0'
@@ -27,12 +27,13 @@ dependencies:
   rive: ^0.11.2
   image_picker: ^1.0.2
   dotted_border: ^2.0.0+3
-  firebase_core: ^2.15.1
-  firebase_auth: ^4.7.3
-  cloud_firestore: ^4.8.5
-  firebase_messaging: ^14.6.7
-  firebase_storage: ^11.2.6
-  cloud_functions: ^4.4.0
+  intl_phone_field: ^3.2.0
+  firebase_core: ^2.16.0
+  firebase_auth: ^4.10.0
+  cloud_firestore: ^4.9.2
+  firebase_messaging: ^14.6.8
+  firebase_storage: ^11.2.7
+  cloud_functions: ^4.4.1
 
 dev_dependencies:
   flutter_test:

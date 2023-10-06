@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/presentation/widgets/custom_card.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/presentation/widgets/custom_card.dart';
 
 class CustomIconButton extends StatelessWidget {
   const CustomIconButton({

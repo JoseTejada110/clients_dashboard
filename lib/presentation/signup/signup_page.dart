@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/core/utils/utils.dart';
-import 'package:skeleton_app/presentation/signup/signup_controller.dart';
-import 'package:skeleton_app/presentation/widgets/custom_card.dart';
-import 'package:skeleton_app/presentation/widgets/custom_date_picker.dart';
-import 'package:skeleton_app/presentation/widgets/custom_dropdown.dart';
-import 'package:skeleton_app/presentation/widgets/custom_input.dart';
-import 'package:skeleton_app/presentation/widgets/image_picker_container.dart';
-import 'package:skeleton_app/presentation/widgets/input_title.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/core/utils/utils.dart';
+import 'package:bisonte_app/presentation/signup/signup_controller.dart';
+import 'package:bisonte_app/presentation/widgets/custom_card.dart';
+import 'package:bisonte_app/presentation/widgets/custom_date_picker.dart';
+import 'package:bisonte_app/presentation/widgets/custom_dropdown.dart';
+import 'package:bisonte_app/presentation/widgets/custom_input.dart';
+import 'package:bisonte_app/presentation/widgets/image_picker_container.dart';
+import 'package:bisonte_app/presentation/widgets/input_title.dart';
+import 'package:intl_phone_field/country_picker_dialog.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 class SignUpPage extends GetView<SignUpController> {
   const SignUpPage({super.key});
@@ -142,10 +144,23 @@ class _SecondStepContent extends GetView<SignUpController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const InputTitle('Número Telefónico', isRequired: true),
-        CustomInput(
+        IntlPhoneField(
+          invalidNumberMessage: 'Número telefónico inválido',
           controller: controller.phoneController,
-          autocorrect: false,
-          textInputType: TextInputType.phone,
+          decoration: const InputDecoration(
+            isDense: true,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+          ),
+          initialCountryCode: 'DO',
+          languageCode: 'es',
+          pickerDialogStyle: PickerDialogStyle(
+            searchFieldInputDecoration: const InputDecoration(
+              label: Text('Buscar País'),
+            ),
+          ),
+          onCountryChanged: controller.pickCountry,
         ),
         const SizedBox(height: 10),
         const InputTitle('Dirección', isRequired: true),

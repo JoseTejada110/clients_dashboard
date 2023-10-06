@@ -18,7 +18,7 @@ class NotificationUsecase {
       criticalAlert: true,
       sound: true,
     );
-    print('User granted permission: ${settings.authorizationStatus}');
+    // print('User granted permission: ${settings.authorizationStatus}');
     return settings.authorizationStatus == AuthorizationStatus.authorized ||
         settings.authorizationStatus == AuthorizationStatus.provisional;
   }
@@ -35,13 +35,13 @@ class NotificationUsecase {
     String topic,
   ) async {
     try {
-      final result = await FirebaseFunctions.instance
+      await FirebaseFunctions.instance
           .httpsCallable('sendNotificationToTopic')
           .call({"title": title, "message": message, "topic": topic});
-      print(result);
+      // print(result);
       return true;
     } catch (e) {
-      print(e);
+      // print(e);
       return false;
     }
   }
@@ -61,13 +61,11 @@ class NotificationUsecase {
       for (final element in snapshot.docs) {
         tokens.add(element.id);
       }
-      final result = await FirebaseFunctions.instance
+      await FirebaseFunctions.instance
           .httpsCallable('sendNotificationToUser')
           .call({"title": title, "message": message, "tokens": tokens});
-      print(result);
       return true;
     } catch (e) {
-      print(e);
       return false;
     }
   }

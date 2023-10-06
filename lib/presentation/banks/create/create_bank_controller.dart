@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skeleton_app/core/utils/messages_utils.dart';
-import 'package:skeleton_app/core/utils/utils.dart';
-import 'package:skeleton_app/data/models/bank_model.dart';
-import 'package:skeleton_app/domain/repositories/api_repository.dart';
-import 'package:skeleton_app/domain/requests/firebase_params_request.dart';
-import 'package:skeleton_app/domain/usecases/general_usecase.dart';
-import 'package:skeleton_app/presentation/banks/banks_controller.dart';
+import 'package:bisonte_app/core/utils/messages_utils.dart';
+import 'package:bisonte_app/core/utils/utils.dart';
+import 'package:bisonte_app/data/models/bank_model.dart';
+import 'package:bisonte_app/domain/repositories/api_repository.dart';
+import 'package:bisonte_app/domain/requests/firebase_params_request.dart';
+import 'package:bisonte_app/domain/usecases/general_usecase.dart';
+import 'package:bisonte_app/presentation/banks/banks_controller.dart';
 
 class CreateBankController extends GetxController {
   CreateBankController({required this.apiRepository});

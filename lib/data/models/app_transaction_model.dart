@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:skeleton_app/core/constants.dart';
+import 'package:bisonte_app/core/constants.dart';
 
 class AppTransaction {
   AppTransaction({

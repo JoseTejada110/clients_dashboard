@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_notifier.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:intl/intl.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/presentation/admin/transactions/verify/verify_transaction_controller.dart';
-import 'package:skeleton_app/presentation/widgets/custom_buttons.dart';
-import 'package:skeleton_app/presentation/widgets/custom_card.dart';
-import 'package:skeleton_app/presentation/widgets/image_picker_container.dart';
-import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/presentation/admin/transactions/verify/verify_transaction_controller.dart';
+import 'package:bisonte_app/presentation/widgets/custom_buttons.dart';
+import 'package:bisonte_app/presentation/widgets/custom_card.dart';
+import 'package:bisonte_app/presentation/widgets/image_picker_container.dart';
+import 'package:bisonte_app/presentation/widgets/placeholders_widgets.dart';
 
 class VerifyTransactionPage extends GetView<VerifyTransactionController> {
   const VerifyTransactionPage({super.key});

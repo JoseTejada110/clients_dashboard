@@ -3,14 +3,14 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:skeleton_app/presentation/main_binding.dart';
-import 'package:skeleton_app/presentation/routes/app_navigation.dart';
-import 'package:skeleton_app/presentation/theme.dart';
+import 'package:bisonte_app/presentation/main_binding.dart';
+import 'package:bisonte_app/presentation/routes/app_navigation.dart';
+import 'package:bisonte_app/presentation/theme.dart';
 
 @pragma('vm:entry-point')
 Future<void> _handleBackgroundNotifications(RemoteMessage message) async {
   //
-  print("Handling a background message: ${message.messageId}");
+  // print("Handling a background message: ${message.messageId}");
 }
 
 void main() async {

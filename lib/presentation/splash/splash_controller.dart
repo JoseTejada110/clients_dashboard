@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/route_manager.dart';
-import 'package:skeleton_app/domain/repositories/local_storage_repository.dart';
-import 'package:skeleton_app/presentation/routes/app_navigation.dart';
+import 'package:bisonte_app/domain/repositories/local_storage_repository.dart';
+import 'package:bisonte_app/presentation/routes/app_navigation.dart';
 
 class SplashController extends GetxController {
   SplashController({required this.localStorageRepository});

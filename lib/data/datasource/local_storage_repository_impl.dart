@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:skeleton_app/data/models/user_model.dart';
-import 'package:skeleton_app/domain/repositories/local_storage_repository.dart';
+import 'package:bisonte_app/data/models/user_model.dart';
+import 'package:bisonte_app/domain/repositories/local_storage_repository.dart';
 
 class LocalStorageRepositoryImpl extends LocalStorageRepositoryInterface {
   @override

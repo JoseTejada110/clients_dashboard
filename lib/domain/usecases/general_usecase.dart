@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:skeleton_app/core/error_handling/failures.dart';
-import 'package:skeleton_app/domain/repositories/api_repository.dart';
-import 'package:skeleton_app/domain/requests/firebase_params_request.dart';
-import 'package:skeleton_app/domain/usecases/catch_request_exceptions.dart';
+import 'package:bisonte_app/core/error_handling/failures.dart';
+import 'package:bisonte_app/domain/repositories/api_repository.dart';
+import 'package:bisonte_app/domain/requests/firebase_params_request.dart';
+import 'package:bisonte_app/domain/usecases/catch_request_exceptions.dart';
 
 class GeneralUsecase {
   GeneralUsecase(this.apiRepository);

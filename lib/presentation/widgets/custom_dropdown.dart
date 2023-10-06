@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skeleton_app/data/models/bank_model.dart';
+import 'package:bisonte_app/data/models/bank_model.dart';
 
 class CustomDropdown extends StatelessWidget {
   const CustomDropdown({

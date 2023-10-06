@@ -1,5 +1,5 @@
 import 'package:get/instance_manager.dart';
-import 'package:skeleton_app/presentation/admin/investments/create/create_investments_controller.dart';
+import 'package:bisonte_app/presentation/admin/investments/create/create_investments_controller.dart';
 
 class CreateInvestmentsBinding extends Bindings {
   @override

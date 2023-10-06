@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:skeleton_app/presentation/widgets/custom_card.dart';
+import 'package:bisonte_app/presentation/widgets/custom_card.dart';
 
 class DashboardCard extends StatelessWidget {
   const DashboardCard({

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/route_manager.dart';
-import 'package:skeleton_app/core/error_handling/failures.dart';
-import 'package:skeleton_app/core/utils/messages_utils.dart';
-import 'package:skeleton_app/domain/repositories/api_repository.dart';
-import 'package:skeleton_app/domain/usecases/notifications_usecase.dart';
-import 'package:skeleton_app/presentation/widgets/placeholders_widgets.dart';
+import 'package:bisonte_app/core/error_handling/failures.dart';
+import 'package:bisonte_app/core/utils/messages_utils.dart';
+import 'package:bisonte_app/domain/repositories/api_repository.dart';
+import 'package:bisonte_app/domain/usecases/notifications_usecase.dart';
+import 'package:bisonte_app/presentation/widgets/placeholders_widgets.dart';
 
 class BulkNotificationController extends GetxController {
   BulkNotificationController({required this.apiRepository});
@@ -19,11 +19,11 @@ class BulkNotificationController extends GetxController {
   void showConfirmation(BuildContext context) async {
     final isValidFields = _validateFields();
     if (!isValidFields) return;
-    final recipientType = 'clientes';
+    const recipientType = 'clientes';
     await MessagesUtils.showConfirmation(
       context: context,
       title: 'Confirmar Mensaje',
-      subtitle: Text(
+      subtitle: const Text(
           '¿Seguro que deseas enviar la notificación a todos los $recipientType?'),
       onConfirm: () {
         Navigator.pop(context);

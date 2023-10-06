@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:get/route_manager.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/core/utils/utils.dart';
-import 'package:skeleton_app/presentation/profile/profile_controller.dart';
-import 'package:skeleton_app/presentation/routes/app_navigation.dart';
-import 'package:skeleton_app/presentation/widgets/custom_card.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/core/utils/utils.dart';
+import 'package:bisonte_app/presentation/profile/profile_controller.dart';
+import 'package:bisonte_app/presentation/routes/app_navigation.dart';
+import 'package:bisonte_app/presentation/widgets/custom_card.dart';
 
 class ProfilePage extends GetView<ProfileController> {
   const ProfilePage({super.key});
@@ -64,9 +64,7 @@ class ProfilePage extends GetView<ProfileController> {
                 ],
               ),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                print('GO TO CLIENT DETAILS');
-              },
+              // onTap: () {},
             ),
           ),
           const SizedBox(height: 10),
@@ -76,16 +74,18 @@ class ProfilePage extends GetView<ProfileController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ListTile(
-                    leading: const Icon(Icons.business),
-                    title: const Text(
-                      'Administrar mis cuentas de banco',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () => Get.toNamed(AppRoutes.banks),
-                  ),
-                  const Divider(),
+                  user.isAdmin
+                      ? const SizedBox()
+                      : ListTile(
+                          leading: const Icon(Icons.business),
+                          title: const Text(
+                            'Administrar mis cuentas de banco',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: () => Get.toNamed(AppRoutes.banks),
+                        ),
+                  user.isAdmin ? const SizedBox() : const Divider(),
                   ListTile(
                     leading: const Icon(Icons.people),
                     title: const Text(

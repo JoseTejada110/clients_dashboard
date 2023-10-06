@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:skeleton_app/core/constants.dart';
-import 'package:skeleton_app/data/models/investment_model.dart';
-import 'package:skeleton_app/presentation/routes/app_navigation.dart';
+import 'package:bisonte_app/core/constants.dart';
+import 'package:bisonte_app/data/models/investment_model.dart';
+import 'package:bisonte_app/presentation/routes/app_navigation.dart';
 
 class InvestmentsList extends StatelessWidget {
   const InvestmentsList({
@@ -93,7 +93,6 @@ class _InvestmentItem extends StatelessWidget {
           Get.toNamed(AppRoutes.invest, arguments: investment);
           return;
         }
-        print('GO TO INVESTMENT DETAILS');
         Get.toNamed(AppRoutes.createInvestment, arguments: investment);
       },
     );
