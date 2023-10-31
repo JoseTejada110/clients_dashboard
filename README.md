@@ -1,16 +1,53 @@
-# skeleton_app
+# Bisonte App - Investor Mobile App
 
-A new Flutter project.
+Welcome to Bisonte App repository! This mobile app provides you with a convenient way to manage your investments and financial portfolio. 
 
-## Getting Started
+<table>
+  <tr>
+    <td>
+      <img src="home.png" alt="Home Page" width="320">
+    </td>
+    <td>
+      <video width="320" height="240" controls>
+        <source src="client_side_tour.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </td>
+  </tr>
+</table>
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+With this app, you can:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Real-time Account Information**: View essential account information in real-time.
+- **Investment Monitoring**: Keep track of your investments and make well-informed decisions.
+- **Diverse Investment Options**: Explore a wide range of investment choices to diversify your portfolio.
+- **Deposits**: Easily record your deposits to increase your investment funds.
+- **Withdrawal Requests**: Request withdrawals of your earnings quickly and effortlessly.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Architecture
+
+The Bisonte App is built using a robust and maintainable architecture based on Clean Architecture, which includes the Repository Pattern for data management and the Visitor Pattern for comprehensive error handling. This architecture ensures separation of concerns, testability, and maintainability of the codebase.
+
+### Key Components
+
+- **Presentation Layer**: This layer contains the user interface components and interacts with the domain layer. It is responsible for handling user interactions and presenting data to the user.
+
+- **Domain Layer**: The core business logic resides in this layer. It is agnostic to the data source and external frameworks. It defines entities, use cases, and business rules.
+
+- **Data Layer**: The data layer is responsible for data retrieval and storage. It utilizes the Repository Pattern to abstract data sources, making it easy to switch between different data providers (e.g., API, local database).
+
+- **Core**: Utils functions, constants and error handling using Visitor Pattern. This design pattern allows for a flexible and extensible approach to handling and managing errors. Each error type can be treated individually, providing informative and actionable feedback to the user.
+
+### Benefits of the Architecture
+
+- **Testability**: The clean separation of concerns and dependencies makes it easier to write unit tests for the various components of the app.
+
+- **Maintainability**: Changes in one layer (e.g., switching to a new data source) do not impact other parts of the application, making it easier to maintain and scale the app.
+
+- **Scalability**: The architecture is scalable, allowing for the addition of new features or changes with minimal disruption to existing code.
+
+By adopting Clean Architecture with the Repository Pattern and the Visitor Pattern for error handling, the Nuac Venture Capital Investor Mobile App offers a solid foundation for a secure, maintainable, and feature-rich application.
+
+

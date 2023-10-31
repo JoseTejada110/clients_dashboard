@@ -30,30 +30,30 @@ class Utils {
     MessagesUtils.successSnackbar(successTitle, successMessage);
   }
 
-  static Future<void> callPhoneNumber(String data) async {
-    try {
-      final number = data
-          .replaceAll('-', '')
-          .replaceAll('(', '')
-          .replaceAll(')', '')
-          .trim();
-      if (number.isEmpty) {
-        MessagesUtils.errorSnackbar(
-          'Número Inválido',
-          'No hemos podido encontrar un número telefónico asociado a esta entidad.',
-        );
-        return;
-      }
-      final uri = Uri.parse('tel:+1-$number');
-      // if (await canLaunchUrl(uri)) {
-      //   await launchUrl(uri);
-      // } else {
-      //   // _failedSnackbar(context, 'Número telefónico inválido');
-      // }
-    } catch (e) {
-      // _failedSnackbar(context, 'No se pudo realizar la llamada');
-    }
-  }
+  // static Future<void> callPhoneNumber(String data) async {
+  //   try {
+  //     final number = data
+  //         .replaceAll('-', '')
+  //         .replaceAll('(', '')
+  //         .replaceAll(')', '')
+  //         .trim();
+  //     if (number.isEmpty) {
+  //       MessagesUtils.errorSnackbar(
+  //         'Número Inválido',
+  //         'No hemos podido encontrar un número telefónico asociado a esta entidad.',
+  //       );
+  //       return;
+  //     }
+  //     final uri = Uri.parse('tel:+1-$number');
+  // if (await canLaunchUrl(uri)) {
+  //   await launchUrl(uri);
+  // } else {
+  //   // _failedSnackbar(context, 'Número telefónico inválido');
+  // }
+  // } catch (e) {
+  // _failedSnackbar(context, 'No se pudo realizar la llamada');
+  // }
+  // }
 
   static bool isNumeric(String? string) {
     if (string == null) {
