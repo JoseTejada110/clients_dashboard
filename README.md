@@ -8,10 +8,11 @@ Welcome to Bisonte App repository! This mobile app provides you with a convenien
       <img src="home.png" alt="Home Page" width="320">
     </td>
     <td>
-      <video width="320" height="240" controls>
-        <source src="client_side_tour.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      
+
+https://github.com/JoseTejada110/clients_dashboard/assets/83741816/8396cdf2-caec-4e50-a294-219175d6e265
+
+
     </td>
   </tr>
 </table>
