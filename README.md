@@ -9,10 +9,7 @@ Welcome to Bisonte App repository! This mobile app provides you with a convenien
     </td>
     <td>
       
-
-https://github.com/JoseTejada110/clients_dashboard/assets/83741816/8396cdf2-caec-4e50-a294-219175d6e265
-
-
+https://github.com/JoseTejada110/clients_dashboard/assets/83741816/14e879ba-d05e-4769-ae50-17ebd8ec9d9b
 
   </tr>
 </table>
