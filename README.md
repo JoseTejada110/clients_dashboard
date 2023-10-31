@@ -13,7 +13,7 @@ Welcome to Bisonte App repository! This mobile app provides you with a convenien
 https://github.com/JoseTejada110/clients_dashboard/assets/83741816/8396cdf2-caec-4e50-a294-219175d6e265
 
 
-    </td>
+
   </tr>
 </table>
 
