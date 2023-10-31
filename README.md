@@ -19,7 +19,7 @@ https://github.com/JoseTejada110/clients_dashboard/assets/83741816/8396cdf2-caec
 
 ## Features
 
-With this app, you can:
+With this app, you have:
 
 - **Real-time Account Information**: View essential account information in real-time.
 - **Investment Monitoring**: Keep track of your investments and make well-informed decisions.
@@ -29,13 +29,13 @@ With this app, you can:
 
 ## Architecture
 
-The Bisonte App is built using a robust and maintainable architecture based on Clean Architecture, which includes the Repository Pattern for data management and the Visitor Pattern for comprehensive error handling. This architecture ensures separation of concerns, testability, and maintainability of the codebase.
+The Bisonte App is built using a robust and maintainable architecture based on **Clean Architecture**, which includes the Repository Pattern for data management and the Visitor Pattern for comprehensive error handling. This architecture ensures separation of concerns, testability, and maintainability of the codebase.
 
 ### Key Components
 
 - **Presentation Layer**: This layer contains the user interface components and interacts with the domain layer. It is responsible for handling user interactions and presenting data to the user.
 
-- **Domain Layer**: The core business logic resides in this layer. It is agnostic to the data source and external frameworks. It defines entities, use cases, and business rules.
+- **Domain Layer**: The core business logic resides in this layer. It defines entities, use cases, and business rules.
 
 - **Data Layer**: The data layer is responsible for data retrieval and storage. It utilizes the Repository Pattern to abstract data sources, making it easy to switch between different data providers (e.g., API, local database).
 
